@@ -1,0 +1,136 @@
+/* ─── Scroll-reveal ──────────────────────────────────────────── */
+(function initReveal() {
+  const els = document.querySelectorAll('.reveal');
+  if (!els.length) return;
+  const io = new IntersectionObserver(
+    (entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          io.unobserve(e.target);
+        }
+      });
+    },
+    { threshold: 0.12, rootMargin: '0px 0px -40px 0px' }
+  );
+  els.forEach((el, i) => {
+    el.style.transitionDelay = (i % 6) * 60 + 'ms';
+    io.observe(el);
+  });
+})();
+
+/* ─── Accordion ──────────────────────────────────────────────── */
+(function initAccordion() {
+  const items = document.querySelectorAll('.accordion-item');
+  items.forEach(item => {
+    const toggle = item.querySelector('.accordion-item__toggle');
+    if (!toggle) return;
+    toggle.addEventListener('click', () => {
+      const isOpen = item.classList.contains('open');
+      // close all
+      items.forEach(i => {
+        i.classList.remove('open');
+        const t = i.querySelector('.accordion-item__toggle');
+        if (t) t.setAttribute('aria-expanded', 'false');
+      });
+      // open clicked if it was closed
+      if (!isOpen) {
+        item.classList.add('open');
+        toggle.setAttribute('aria-expanded', 'true');
+      }
+    });
+  });
+})();
+
+/* ─── Works carousel ─────────────────────────────────────────── */
+(function initCarousel() {
+  const carousel = document.getElementById('worksCarousel');
+  if (!carousel) return;
+  const cards = carousel.querySelectorAll('.project-card');
+  const dots  = document.getElementById('carouselDots');
+
+  function buildDots(count, active) {
+    if (!dots) return;
+    // keep img but update visually via filter
+  }
+
+  // Drag / swipe support
+  let startX = 0, scrollStart = 0, isDragging = false;
+
+  carousel.addEventListener('mousedown', e => {
+    isDragging = true;
+    startX = e.pageX;
+    scrollStart = carousel.scrollLeft;
+    carousel.style.cursor = 'grabbing';
+  });
+  carousel.addEventListener('mousemove', e => {
+    if (!isDragging) return;
+    carousel.scrollLeft = scrollStart - (e.pageX - startX);
+  });
+  carousel.addEventListener('mouseup',   () => { isDragging = false; carousel.style.cursor = ''; });
+  carousel.addEventListener('mouseleave',() => { isDragging = false; carousel.style.cursor = ''; });
+})();
+
+/* ─── Filter tabs ────────────────────────────────────────────── */
+(function initFilterTabs() {
+  const tabs = document.querySelectorAll('.filter-tab');
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      tabs.forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+    });
+  });
+})();
+
+/* ─── Active nav link ────────────────────────────────────────── */
+(function setActiveNav() {
+  const page  = location.pathname.split('/').pop() || 'index.html';
+  const links = document.querySelectorAll('.floating-nav__link');
+  links.forEach(a => {
+    const href = (a.getAttribute('href') || '').split('/').pop();
+    if (href === page) {
+      a.classList.add('active');
+    } else {
+      a.classList.remove('active');
+    }
+  });
+  // Special: Resume and About me both point to about.html
+  // The "active" state is already handled above.
+})();
+
+/* ─── Project sidebar active section ────────────────────────── */
+(function initSidebarSpy() {
+  const links   = document.querySelectorAll('.project-sidebar__link');
+  const sections = [];
+  links.forEach(l => {
+    const id = l.getAttribute('href')?.replace('#','');
+    if (id) {
+      const el = document.getElementById(id);
+      if (el) sections.push({ id, el, link: l });
+    }
+  });
+  if (!sections.length) return;
+
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      const s = sections.find(s => s.el === e.target);
+      if (!s) return;
+      if (e.isIntersecting) {
+        links.forEach(l => l.classList.remove('active'));
+        s.link.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-20% 0px -70% 0px' });
+
+  sections.forEach(s => io.observe(s.el));
+})();
+
+/* ─── Smooth scroll for sidebar links ───────────────────────── */
+document.querySelectorAll('.project-sidebar__link[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    e.preventDefault();
+    const id = a.getAttribute('href').slice(1);
+    const el = document.getElementById(id);
+    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+});
