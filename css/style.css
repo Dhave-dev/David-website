@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wdth,wght@0,75..125,400..700;1,75..125,400..700&family=Inter:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wdth,wght@0,75..125,400..700;1,75..125,400..700&family=Inter+Display:wght@400;500;600&family=Inter:wght@400;500;600&display=swap');
 
 /* ─── Tokens ─────────────────────────────────────────────────── */
 :root {
@@ -25,7 +25,7 @@
   --c-91:     #919191;
 
   --sans:     'Instrument Sans', sans-serif;
-  --display:  'Inter', sans-serif;
+  --display:  'Inter Display', 'Inter', sans-serif;
   --wdth:     "'wdth' 100";
 }
 
@@ -123,6 +123,7 @@ ol, ul { list-style: none; }
 }
 .btn:hover { opacity: 0.85; }
 .btn-primary  { background: var(--primary); min-width: 160px; }
+.btn-pill     { border-radius: 50px; }
 .btn-dark     { background: var(--border);  min-width: 200px; }
 .btn-wide     { min-width: 200px; }
 
@@ -246,24 +247,32 @@ ol, ul { list-style: none; }
 
 /* ─── Hero section ───────────────────────────────────────────── */
 .hero {
-  padding: 80px 120px 60px;
+  padding: 80px 80px 60px;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 36px;
-  text-align: center;
+  align-items: flex-start;
+  gap: 28px;
 }
 .hero__heading {
-  max-width: 954px;
-  font-family: var(--sans);
-  font-variation-settings: var(--wdth);
-  font-weight: 500;
-  font-size: 60px;
-  letter-spacing: -3px;
-  line-height: 1.0;
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: clamp(44px, 7.5vw, 108px);
+  letter-spacing: -0.03em;
+  line-height: 0.95;
   color: var(--c-white);
+  text-transform: uppercase;
+  width: 100%;
 }
-.hero__heading span.dim { color: var(--c-737); }
+.hero__heading-line1,
+.hero__heading-line2 { display: block; }
+.hero__subtitle {
+  font-family: var(--display);
+  font-weight: 500;
+  font-size: clamp(11px, 1vw, 14px);
+  letter-spacing: 0.18em;
+  color: var(--c-737);
+  text-transform: uppercase;
+}
 .hero__cta { display: flex; gap: 12px; }
 
 /* ─── Hero images strip ──────────────────────────────────────── */
@@ -317,7 +326,7 @@ ol, ul { list-style: none; }
   to   { transform: translateX(-50%); }
 }
 .brand-logos img {
-  height: 16px;
+  height: 32px;
   width: auto;
   object-fit: contain;
   opacity: 0.7;
@@ -1368,9 +1377,9 @@ body { padding-bottom: 140px; }
   .topbar { padding: 20px; flex-wrap: wrap; gap: 16px; }
   .topbar__socials { display: none; }
   .hero { padding: 60px 20px 40px; }
-  .hero__heading { font-size: 36px; letter-spacing: -1.5px; }
+  .hero__heading { font-size: clamp(36px, 10vw, 56px); letter-spacing: -0.02em; }
   .brand-logos { padding: 40px 20px; gap: 24px; }
-  .brand-logos img { height: 28px; }
+  .brand-logos img { height: 32px; }
   .recent-works__header { padding: 0 20px; }
   .works-carousel { padding: 0 20px 24px; }
   .project-card { width: 320px; }
@@ -1404,7 +1413,7 @@ body { padding-bottom: 140px; }
 }
 
 @media (max-width: 430px) {
-  .hero__heading { font-size: 30px; letter-spacing: -1px; }
+  .hero__heading { font-size: 28px; letter-spacing: -0.02em; }
   .floating-nav { width: calc(100% - 32px); bottom: 20px; }
   .works-list-item__img { height: 200px; }
 }
