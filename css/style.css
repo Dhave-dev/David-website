@@ -166,6 +166,14 @@ ol, ul { list-style: none; }
 .social-btn:hover { background: var(--border); }
 .social-btn img { width: 33px; height: 33px; object-fit: contain; }
 
+/* Smaller social icons in topbar only */
+.topbar__socials .social-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 18px;
+}
+.topbar__socials .social-btn img { width: 18px; height: 18px; }
+
 /* ─── Divider ────────────────────────────────────────────────── */
 .divider {
   width: 100%;
@@ -262,22 +270,26 @@ ol, ul { list-style: none; }
 .hero-images {
   width: 100%;
   overflow: hidden;
-  height: 432px;
+  height: 260px;
   margin-top: 20px;
-  position: relative;
 }
 .hero-images__track {
   display: flex;
   gap: 16px;
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 1463px;
-  height: 432px;
+  width: max-content;
+  height: 260px;
+  animation: hero-scroll 22s linear infinite;
+}
+.hero-images__track:hover { animation-play-state: paused; }
+@keyframes hero-scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
 }
 .hero-images__frame {
   flex-shrink: 0;
-  border-radius: 23px;
+  width: 320px;
+  height: 260px;
+  border-radius: 20px;
   overflow: hidden;
   background: #fff;
 }
@@ -286,25 +298,31 @@ ol, ul { list-style: none; }
   height: 100%;
   object-fit: cover;
 }
-.hi-lg { width: 479px; height: 432px; }
-.hi-md { width: 479px; height: 323px; align-self: flex-end; border-radius: 40px; }
 
 /* ─── Brand logos ────────────────────────────────────────────── */
 .brand-logos {
-  padding: 60px 120px;
+  overflow: hidden;
+  padding: 40px 0;
+}
+.brand-logos__track {
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 65px;
-  flex-wrap: wrap;
+  gap: 60px;
+  width: max-content;
+  animation: brand-scroll 18s linear infinite;
+}
+.brand-logos__track:hover { animation-play-state: paused; }
+@keyframes brand-scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
 }
 .brand-logos img {
-  height: 40px;
+  height: 16px;
   width: auto;
   object-fit: contain;
   opacity: 0.7;
+  flex-shrink: 0;
 }
-.brand-logos img.lg { height: 44px; }
 
 /* ─── Recent Works ───────────────────────────────────────────── */
 .recent-works {
