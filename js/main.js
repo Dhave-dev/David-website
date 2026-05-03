@@ -1,7 +1,5 @@
 /* ─── Scroll-reveal ──────────────────────────────────────────── */
 (function initReveal() {
-  const els = document.querySelectorAll('.reveal');
-  if (!els.length) return;
   const io = new IntersectionObserver(
     (entries) => {
       entries.forEach(e => {
@@ -13,7 +11,9 @@
     },
     { threshold: 0.12, rootMargin: '0px 0px -40px 0px' }
   );
-  els.forEach((el, i) => {
+  // expose so CMS loaders can observe dynamically injected elements
+  window.__revealObserver = io;
+  document.querySelectorAll('.reveal').forEach((el, i) => {
     el.style.transitionDelay = (i % 6) * 60 + 'ms';
     io.observe(el);
   });
@@ -86,16 +86,14 @@
 (function setActiveNav() {
   const page  = location.pathname.split('/').pop() || 'index.html';
   const links = document.querySelectorAll('.floating-nav__link');
-  links.forEach(a => {
+  // Clear all first
+  links.forEach(a => a.classList.remove('active'));
+  // Activate only the FIRST link whose href matches current page
+  const match = Array.from(links).find(a => {
     const href = (a.getAttribute('href') || '').split('/').pop();
-    if (href === page) {
-      a.classList.add('active');
-    } else {
-      a.classList.remove('active');
-    }
+    return href === page;
   });
-  // Special: Resume and About me both point to about.html
-  // The "active" state is already handled above.
+  if (match) match.classList.add('active');
 })();
 
 /* ─── Project sidebar active section ────────────────────────── */
@@ -134,3 +132,47 @@ document.querySelectorAll('.project-sidebar__link[href^="#"]').forEach(a => {
     if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
   });
 });
+
+/* ─── Expertise: hover to swap image ────────────────────────── */
+(function initExpertiseHover() {
+  const items = document.querySelectorAll('.accordion-item[data-image]');
+  const imgEl = document.querySelector('.expertise__image img');
+  if (!items.length || !imgEl) return;
+
+  imgEl.style.transition = 'opacity 0.22s ease';
+
+  items.forEach(item => {
+    item.addEventListener('mouseenter', () => {
+      const src = item.getAttribute('data-image');
+      if (!src || imgEl.src.endsWith(src)) return;
+      imgEl.style.opacity = '0';
+      setTimeout(() => {
+        imgEl.src = src;
+        imgEl.style.opacity = '1';
+      }, 220);
+    });
+  });
+})();
+
+/* ─── Floating nav: hide on scroll down, show on scroll up ──── */
+(function initNavScroll() {
+  const nav = document.querySelector('.floating-nav');
+  if (!nav) return;
+  let lastY = window.scrollY;
+  let ticking = false;
+
+  window.addEventListener('scroll', () => {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(() => {
+      const y = window.scrollY;
+      if (y > lastY && y > 80) {
+        nav.classList.add('nav-hidden');
+      } else {
+        nav.classList.remove('nav-hidden');
+      }
+      lastY = y;
+      ticking = false;
+    });
+  }, { passive: true });
+})();
