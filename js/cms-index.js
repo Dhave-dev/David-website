@@ -13,15 +13,11 @@ async function loadProjects() {
       }`
     )
   } catch (e) {
-    console.error('CMS fetch failed:', e)
-    grid.innerHTML = ''
-    return
+    console.error('CMS fetch failed — showing fallback cards:', e)
+    return // keep whatever static HTML is already in the grid
   }
 
-  if (!projects?.length) {
-    grid.innerHTML = ''
-    return
-  }
+  if (!projects?.length) return // keep fallback cards
 
   grid.innerHTML = projects.map(p => `
     <a href="project.html?slug=${p.slug.current}" class="project-card reveal">
