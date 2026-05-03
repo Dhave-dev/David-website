@@ -5,13 +5,23 @@ async function loadProjects() {
   const grid = document.getElementById('worksCarousel')
   if (!grid) return
 
-  const projects = await sanityFetch(
-    `*[_type == "project"] | order(order asc) [0...6] {
-      _id, title, slug, category, coverImage
-    }`
-  )
+  let projects
+  try {
+    projects = await sanityFetch(
+      `*[_type == "project"] | order(order asc) [0...6] {
+        _id, title, slug, category, coverImage
+      }`
+    )
+  } catch (e) {
+    console.error('CMS fetch failed:', e)
+    grid.innerHTML = ''
+    return
+  }
 
-  if (!projects?.length) return
+  if (!projects?.length) {
+    grid.innerHTML = ''
+    return
+  }
 
   grid.innerHTML = projects.map(p => `
     <a href="project.html?slug=${p.slug.current}" class="project-card reveal">

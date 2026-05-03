@@ -841,6 +841,13 @@ body { padding-bottom: 140px; }
   background-size: 600px 100%;
   animation: shimmer 1.4s infinite linear;
 }
+.card-skeleton {
+  border-radius: 16px;
+  background: linear-gradient(90deg, #1a1a1c 25%, #222224 50%, #1a1a1c 75%);
+  background-size: 800px 100%;
+  animation: shimmer 1.4s infinite linear;
+  aspect-ratio: 16/10;
+}
 .works-list-item {
   display: flex;
   align-items: flex-start;
