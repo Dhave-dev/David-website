@@ -18,7 +18,7 @@ async function loadProject() {
         description, liveUrl, coverImage,
         sections[] {
           title, body,
-          images[] { ..., asset-> }
+          images[] { asset, alt, caption }
         }
       }`,
       { slug }

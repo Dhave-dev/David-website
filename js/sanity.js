@@ -22,10 +22,18 @@ export async function sanityFetch(query, params = {}) {
 }
 
 export function imageUrl(asset, width = 800) {
-  if (!asset?.asset?._ref) return ''
-  // ref format: image-<id>-<dims>-<ext>
-  const ref = asset.asset._ref
-  const [, id, dims, ext] = ref.split('-')
+  // Handle dereferenced asset with direct url
+  if (asset?.asset?.url) {
+    return `${asset.asset.url}?w=${width}&auto=format&fit=crop`
+  }
+  const ref = asset?.asset?._ref || asset?._ref
+  if (!ref) return ''
+  // ref format: image-<id>-<WxH>-<ext>
+  // Split from the right to safely extract ext and dims
+  const parts = ref.split('-')
+  const ext  = parts[parts.length - 1]
+  const dims = parts[parts.length - 2]
+  const id   = parts.slice(1, parts.length - 2).join('-')
   return `https://cdn.sanity.io/images/${PROJECT_ID}/${DATASET}/${id}-${dims}.${ext}?w=${width}&auto=format&fit=crop`
 }
 

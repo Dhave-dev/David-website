@@ -1030,7 +1030,7 @@ body { padding-bottom: 140px; }
 }
 .project-sidebar {
   flex-shrink: 0;
-  width: 125px;
+  width: 200px;
   position: sticky;
   top: 120px;
   display: flex;
@@ -1040,12 +1040,15 @@ body { padding-bottom: 140px; }
 .project-sidebar__link {
   font-family: var(--display);
   font-weight: 400;
-  font-size: 16px;
+  font-size: 15px;
   letter-spacing: -0.16px;
   line-height: 24px;
   color: var(--c-595);
   transition: color .2s;
   cursor: pointer;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .project-sidebar__link.active,
 .project-sidebar__link:hover { color: #fff; }
