@@ -19,6 +19,12 @@ export const testimonial = defineType({
       validation: (R) => R.required(),
     }),
     defineField({
+      name: 'authorRole',
+      title: 'Author Role / Company',
+      type: 'string',
+      description: 'e.g. "CEO, Acme Inc." or "Lead Designer"',
+    }),
+    defineField({
       name: 'authorAvatar',
       title: 'Author Avatar',
       type: 'image',
@@ -28,9 +34,10 @@ export const testimonial = defineType({
       name: 'order',
       title: 'Display Order',
       type: 'number',
+      initialValue: 99,
     }),
   ],
   preview: {
-    select: { title: 'authorName', subtitle: 'text', media: 'authorAvatar' },
+    select: { title: 'authorName', subtitle: 'authorRole', media: 'authorAvatar' },
   },
 })

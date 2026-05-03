@@ -33,6 +33,65 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
 
+/* ─── Site Loader ─────────────────────────────────────────────── */
+#site-loader {
+  position: fixed;
+  inset: 0;
+  background: var(--bg);
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.7s cubic-bezier(0.4,0,0.2,1), visibility 0.7s;
+}
+#site-loader.loader--done {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+.loader__name {
+  font-family: var(--display);
+  font-size: clamp(32px, 6vw, 72px);
+  font-weight: 700;
+  letter-spacing: -2px;
+  color: #fff;
+  user-select: none;
+}
+.loader__footer {
+  position: absolute;
+  bottom: 40px;
+  left: 40px;
+  right: 40px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.loader__bar {
+  flex: 1;
+  height: 1px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 1px;
+  overflow: hidden;
+}
+.loader__bar-fill {
+  height: 100%;
+  width: 0%;
+  background: var(--primary);
+  border-radius: 1px;
+  transition: width 0.04s linear;
+}
+.loader__count {
+  font-family: var(--display);
+  font-size: 13px;
+  font-weight: 500;
+  color: rgba(255,255,255,0.45);
+  min-width: 36px;
+  text-align: right;
+  letter-spacing: 0.5px;
+  flex-shrink: 0;
+}
+
 /* Fixed cinematic vignette — left & right edges */
 body::before,
 body::after {
@@ -764,6 +823,15 @@ body { padding-bottom: 140px; }
   font-size: 20px;
   letter-spacing: -1px;
   color: #fff;
+  display: block;
+}
+.testimonial-card__role {
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: 13px;
+  color: var(--c-737);
+  display: block;
+  margin-top: 2px;
 }
 
 /* ─── Footer ─────────────────────────────────────────────────── */
@@ -1087,6 +1155,17 @@ body { padding-bottom: 140px; }
   font-weight: 600;
   color: #fff;
   margin: 24px 0 10px;
+}
+.project-subsection {
+  margin-top: 32px;
+}
+.project-subsection-title {
+  font-family: var(--display);
+  font-size: 18px;
+  font-weight: 600;
+  color: #fff;
+  letter-spacing: -0.2px;
+  margin-bottom: 10px;
 }
 
 .project-img-block {

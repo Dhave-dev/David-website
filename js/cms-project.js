@@ -18,6 +18,7 @@ async function loadProject() {
         description, liveUrl, coverImage,
         sections[] {
           title, body,
+          subsections[] { title, body },
           images[] { asset, alt, caption }
         }
       }`,
@@ -82,6 +83,14 @@ async function loadProject() {
   content.innerHTML = p.sections.map((sec, i) => {
     const id = toId(sec.title)
     const bodyHtml = toHtml(sec.body)
+
+    const subsectionsHtml = (sec.subsections || []).map(sub => `
+      <div class="project-subsection">
+        <h3 class="project-subsection-title">${sub.title}</h3>
+        <div class="project-section-text">${toHtml(sub.body)}</div>
+      </div>
+    `).join('')
+
     const imagesHtml = (sec.images || []).map(img => `
       <div class="project-img-block reveal">
         <img src="${imageUrl(img, 1200)}" alt="${img.alt || sec.title}" loading="lazy" />
@@ -92,7 +101,8 @@ async function loadProject() {
     return `
       <div id="${id}" class="project-section reveal">
         <h2 class="project-section-title">${sec.title}</h2>
-        <div class="project-section-text">${bodyHtml}</div>
+        ${bodyHtml ? `<div class="project-section-text">${bodyHtml}</div>` : ''}
+        ${subsectionsHtml}
         ${imagesHtml}
       </div>
     `

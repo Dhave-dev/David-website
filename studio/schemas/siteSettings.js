@@ -51,8 +51,8 @@ export const siteSettings = defineType({
       type: 'url',
     }),
     defineField({
-      name: 'instagramUrl',
-      title: 'Instagram URL',
+      name: 'dribbbleUrl',
+      title: 'Dribbble URL',
       type: 'url',
     }),
     defineField({
@@ -76,6 +76,14 @@ export const siteSettings = defineType({
       title: 'About Page Portrait',
       type: 'image',
       options: { hotspot: true },
+    }),
+    defineField({
+      name: 'heroImages',
+      title: 'Hero Images (max 4)',
+      type: 'array',
+      of: [{ type: 'image', options: { hotspot: true } }],
+      validation: (Rule) => Rule.max(4),
+      description: 'Images displayed in the hero section grid. Upload up to 4.',
     }),
   ],
   preview: {

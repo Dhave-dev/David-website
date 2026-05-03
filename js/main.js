@@ -1,3 +1,35 @@
+/* ─── Site loader ────────────────────────────────────────────── */
+(function initLoader() {
+  const loader  = document.getElementById('site-loader')
+  const counter = document.getElementById('loaderCount')
+  const bar     = document.getElementById('loaderBar')
+  if (!loader) return
+
+  let count = 0
+  // Ease-out curve: faster early, slower near 100
+  const durations = Array.from({ length: 100 }, (_, i) => {
+    const progress = i / 100
+    return 8 + progress * progress * 28  // 8ms → 36ms per tick
+  })
+  let index = 0
+
+  function tick() {
+    if (index >= 100) {
+      counter.textContent = '100'
+      bar.style.width = '100%'
+      setTimeout(() => loader.classList.add('loader--done'), 400)
+      return
+    }
+    count++
+    index++
+    counter.textContent = count
+    bar.style.width = count + '%'
+    setTimeout(tick, durations[index])
+  }
+
+  tick()
+})();
+
 /* ─── Scroll-reveal ──────────────────────────────────────────── */
 (function initReveal() {
   const io = new IntersectionObserver(

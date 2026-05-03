@@ -16,6 +16,7 @@ export default defineConfig({
         S.list()
           .title('Content')
           .items([
+
             S.listItem()
               .title('Site Settings')
               .id('siteSettings')
@@ -24,19 +25,39 @@ export default defineConfig({
                   .schemaType('siteSettings')
                   .documentId('siteSettings')
               ),
+
             S.divider(),
+
             S.listItem()
               .title('Projects / Case Studies')
               .schemaType('project')
-              .child(S.documentTypeList('project').title('Projects')),
+              .child(S.documentTypeList('project').title('All Projects')),
+
+            S.listItem()
+              .title('Development Projects')
+              .child(
+                S.documentTypeList('project')
+                  .title('Development Projects')
+                  .filter('_type == "project" && filterCategory == "development"')
+              ),
+
+            S.divider(),
+
+            S.listItem()
+              .title('Expertise')
+              .schemaType('expertise')
+              .child(S.documentTypeList('expertise').title('Expertise Items')),
+
             S.listItem()
               .title('Testimonials')
               .schemaType('testimonial')
               .child(S.documentTypeList('testimonial').title('Testimonials')),
+
             S.listItem()
               .title('Brand Logos')
               .schemaType('brandLogo')
               .child(S.documentTypeList('brandLogo').title('Brand Logos')),
+
           ]),
     }),
     visionTool(),

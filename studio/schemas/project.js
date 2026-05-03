@@ -107,20 +107,60 @@ export const project = defineType({
             }),
             defineField({
               name: 'body',
-              title: 'Content',
+              title: 'Section Intro / Overview',
               type: 'array',
+              description: 'Opening paragraph(s) for this section, shown before any subsections',
               of: [
                 {
                   type: 'block',
-                  styles: [
-                    { title: 'Normal', value: 'normal' },
-                    { title: 'Heading', value: 'h3' },
-                  ],
+                  styles: [{ title: 'Normal', value: 'normal' }],
                   marks: {
                     decorators: [
                       { title: 'Bold',   value: 'strong' },
                       { title: 'Italic', value: 'em' },
                     ],
+                  },
+                },
+              ],
+            }),
+            defineField({
+              name: 'subsections',
+              title: 'Subsections',
+              type: 'array',
+              description: 'Named sub-topics within this section — e.g. "Color System", "Typography System"',
+              of: [
+                {
+                  type: 'object',
+                  name: 'subsection',
+                  title: 'Subsection',
+                  fields: [
+                    defineField({
+                      name: 'title',
+                      title: 'Subsection Title',
+                      type: 'string',
+                      description: 'e.g. "Color System", "Typography System"',
+                      validation: (R) => R.required(),
+                    }),
+                    defineField({
+                      name: 'body',
+                      title: 'Content',
+                      type: 'array',
+                      of: [
+                        {
+                          type: 'block',
+                          styles: [{ title: 'Normal', value: 'normal' }],
+                          marks: {
+                            decorators: [
+                              { title: 'Bold',   value: 'strong' },
+                              { title: 'Italic', value: 'em' },
+                            ],
+                          },
+                        },
+                      ],
+                    }),
+                  ],
+                  preview: {
+                    select: { title: 'title' },
                   },
                 },
               ],

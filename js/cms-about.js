@@ -4,7 +4,7 @@ async function loadAbout() {
   const settings = await sanityFetch(
     `*[_type == "siteSettings"][0] {
       aboutBio, availableForWork, availableBadgeText,
-      behanceUrl, linkedinUrl, instagramUrl, email, cvUrl,
+      behanceUrl, linkedinUrl, dribbbleUrl, email, cvUrl,
       portraitImage, avatarImage
     }`
   )
@@ -35,7 +35,7 @@ async function loadAbout() {
   // Social links — all pages share the same social-btn aria-labels
   if (settings.behanceUrl)  document.querySelectorAll('[aria-label="Behance"]').forEach(a  => a.href = settings.behanceUrl)
   if (settings.linkedinUrl) document.querySelectorAll('[aria-label="LinkedIn"]').forEach(a => a.href = settings.linkedinUrl)
-  if (settings.instagramUrl)document.querySelectorAll('[aria-label="Instagram"]').forEach(a=> a.href = settings.instagramUrl)
+  if (settings.dribbbleUrl) document.querySelectorAll('[aria-label="Dribbble"]').forEach(a => a.href = settings.dribbbleUrl)
 
   // CV link
   if (settings.cvUrl) {
