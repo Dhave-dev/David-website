@@ -12,6 +12,13 @@ export const workExperience = defineType({
       validation: (R) => R.required(),
     }),
     defineField({
+      name: 'logo',
+      title: 'Company Logo',
+      type: 'image',
+      options: { hotspot: true },
+      description: 'Upload the company logo (square or icon preferred)',
+    }),
+    defineField({
       name: 'location',
       title: 'Location',
       type: 'string',
@@ -43,13 +50,6 @@ export const workExperience = defineType({
       description: 'Leave blank or type "Present" if currently working here',
     }),
     defineField({
-      name: 'color',
-      title: 'Indicator Color',
-      type: 'string',
-      description: 'Hex color for the square icon, e.g. #14A800',
-      initialValue: '#1B1C1E',
-    }),
-    defineField({
       name: 'order',
       title: 'Display Order',
       type: 'number',
@@ -57,8 +57,8 @@ export const workExperience = defineType({
     }),
   ],
   preview: {
-    select: { title: 'company', subtitle: 'role' },
-    prepare: ({ title, subtitle }) => ({ title, subtitle }),
+    select: { title: 'company', subtitle: 'role', media: 'logo' },
+    prepare: ({ title, subtitle, media }) => ({ title, subtitle, media }),
   },
   orderings: [
     { title: 'Display Order', name: 'orderAsc', by: [{ field: 'order', direction: 'asc' }] },

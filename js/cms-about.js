@@ -78,7 +78,7 @@ async function loadExperience() {
   try {
     items = await sanityFetch(
       `*[_type == "workExperience"] | order(order asc) {
-        _id, company, location, role, type, startDate, endDate, color
+        _id, company, location, role, type, startDate, endDate, logo
       }`
     )
   } catch (e) {
@@ -90,9 +90,12 @@ async function loadExperience() {
 
   container.innerHTML = items.map(item => {
     const dateStr = [item.startDate, item.endDate || 'Present'].filter(Boolean).join(' - ')
+    const logoHtml = item.logo
+      ? `<img src="${imageUrl(item.logo, 150)}" alt="${item.company}" />`
+      : ''
     return `
       <div class="exp-item reveal">
-        <div class="exp-item__icon" style="background:${item.color || '#1B1C1E'};"></div>
+        <div class="exp-item__icon">${logoHtml}</div>
         <div class="exp-item__details">
           <div class="exp-item__company">${item.company}${item.location ? ', ' + item.location : ''}</div>
           <div class="exp-item__role">${item.role}</div>

@@ -109,7 +109,7 @@ async function loadBrandLogos() {
   if (!logos?.length) return
 
   // Duplicate for seamless scroll loop
-  const doubled = [...logos, ...logos]
+  const doubled = [...logos, ...logos, ...logos]
   track.innerHTML = doubled.map(l => {
     const imgSrc = l.logoRef ? refToUrl(l.logoRef, 200) : null
     const inner = imgSrc
