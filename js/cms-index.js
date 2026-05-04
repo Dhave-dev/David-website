@@ -205,18 +205,15 @@ async function loadExpertise() {
   }
 }
 
-/* ─── Hero image URL builder (works with all Sanity ref formats) ─ */
-function heroImgSrc(img) {
-  // asset->{ url } dereference path
-  if (img?.asset?.url) return img.asset.url + '?w=800&auto=format&fit=crop'
-  // _ref path: image-<id>-<WxH>-<ext>
-  const ref = img?.asset?._ref || img?._ref
+/* ─── Build a Sanity CDN URL from an asset _ref string ──────── */
+function refToUrl(ref, width = 800) {
   if (!ref) return ''
+  // ref = "image-<fileId>-<WxH>-<ext>"
   const parts = ref.split('-')
   const ext  = parts[parts.length - 1]
   const dims = parts[parts.length - 2]
   const id   = parts.slice(1, parts.length - 2).join('-')
-  return `https://cdn.sanity.io/images/yt7ymdxw/production/${id}-${dims}.${ext}?w=800&auto=format&fit=crop`
+  return `https://cdn.sanity.io/images/yt7ymdxw/production/${id}-${dims}.${ext}?w=${width}&auto=format&fit=crop`
 }
 
 /* ─── Site settings (hero, socials, avatar) ──────────────────── */
@@ -229,7 +226,7 @@ async function loadSiteSettings() {
         availableForWork, availableBadgeText,
         email, behanceUrl, linkedinUrl, dribbbleUrl, avatarImage,
         brandSectionTitle,
-        "heroImages": heroImages[] { alt, "url": asset->url, asset }
+        "heroRefs": heroImages[].asset._ref
       }`
     )
   } catch (e) {
@@ -270,22 +267,17 @@ async function loadSiteSettings() {
     if (label !== badge) label.textContent = settings.availableBadgeText
   }
 
-  // Hero images — replace the strip with CMS images
-  const heroImgs = settings.heroImages
-  if (heroImgs?.length) {
+  // Hero images — built directly from asset refs (no dereference needed)
+  const refs = settings.heroRefs?.filter(Boolean) || []
+  if (refs.length) {
     const track = document.querySelector('.hero-images__track')
     if (track) {
-      // Duplicate set for seamless scroll loop
-      const set = [...heroImgs, ...heroImgs]
-      track.innerHTML = set.map(img => {
-        // prefer the dereferenced url, fall back to ref parsing
-        const src = img.url
-          ? `${img.url}?w=800&auto=format&fit=crop`
-          : heroImgSrc(img)
-        return `<div class="hero-images__frame">
-          <img src="${src}" alt="${img.alt || ''}" loading="lazy" />
-        </div>`
-      }).join('')
+      const doubled = [...refs, ...refs]
+      track.innerHTML = doubled.map(ref => `
+        <div class="hero-images__frame">
+          <img src="${refToUrl(ref, 900)}" alt="" loading="lazy" />
+        </div>
+      `).join('')
     }
   }
 }
