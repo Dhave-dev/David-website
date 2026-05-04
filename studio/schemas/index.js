@@ -1,7 +1,9 @@
-import { project }      from './project.js'
-import { testimonial }  from './testimonial.js'
-import { brandLogo }    from './brandLogo.js'
-import { siteSettings } from './siteSettings.js'
-import { expertise }    from './expertise.js'
+import { project }        from './project.js'
+import { testimonial }    from './testimonial.js'
+import { brandLogo }      from './brandLogo.js'
+import { siteSettings }   from './siteSettings.js'
+import { expertise }      from './expertise.js'
+import { stackItem }      from './stackItem.js'
+import { workExperience } from './workExperience.js'
 
-export const schemaTypes = [project, testimonial, brandLogo, siteSettings, expertise]
+export const schemaTypes = [project, testimonial, brandLogo, siteSettings, expertise, stackItem, workExperience]

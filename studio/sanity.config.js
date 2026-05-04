@@ -58,6 +58,18 @@ export default defineConfig({
               .schemaType('brandLogo')
               .child(S.documentTypeList('brandLogo').title('Brand Logos')),
 
+            S.divider(),
+
+            S.listItem()
+              .title('My Stack')
+              .schemaType('stackItem')
+              .child(S.documentTypeList('stackItem').title('Stack Items')),
+
+            S.listItem()
+              .title('Work Experience')
+              .schemaType('workExperience')
+              .child(S.documentTypeList('workExperience').title('Work Experience')),
+
           ]),
     }),
     visionTool(),

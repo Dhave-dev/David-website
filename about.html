@@ -35,16 +35,24 @@
 
       <!-- Portrait card -->
       <div class="portrait-card reveal" aria-label="David Ironali portrait">
-        <!-- background decorations -->
-        <div class="portrait-card__bg-left" aria-hidden="true">
-          <img src="assets/d3a8538922c580e4a9eb40f3ded3b019d2fc263a.png" alt="" />
-        </div>
-        <div class="portrait-card__bg-right" aria-hidden="true">
-          <img src="assets/5e728a55a627903110951e65d30ff9b46bacaef5.png" alt="" />
+        <!-- scrolling background images — populated by cms-about.js -->
+        <div class="portrait-bg" aria-hidden="true">
+          <div class="portrait-bg__track" id="portraitBgTrack">
+            <img src="assets/5e728a55a627903110951e65d30ff9b46bacaef5.png" alt="" />
+            <img src="assets/d3a8538922c580e4a9eb40f3ded3b019d2fc263a.png" alt="" />
+            <img src="assets/49532c11ca82ffaef22dd847234cb8a7e51131a9.png" alt="" />
+            <img src="assets/26b1cfcc0df17e6b6f571c08ecee704b358d392c.png" alt="" />
+            <img src="assets/e261f358b1046cf7fcdd3a5eae84d57a0e870be2.png" alt="" />
+            <img src="assets/5e728a55a627903110951e65d30ff9b46bacaef5.png" alt="" />
+            <img src="assets/d3a8538922c580e4a9eb40f3ded3b019d2fc263a.png" alt="" />
+            <img src="assets/49532c11ca82ffaef22dd847234cb8a7e51131a9.png" alt="" />
+            <img src="assets/26b1cfcc0df17e6b6f571c08ecee704b358d392c.png" alt="" />
+            <img src="assets/e261f358b1046cf7fcdd3a5eae84d57a0e870be2.png" alt="" />
+          </div>
         </div>
         <!-- portrait photo -->
         <div class="portrait-card__photo">
-          <img src="assets/1ae368b5e94138aad94d2dc49aac984c36a6f749.png" alt="David Ironali" />
+          <img src="assets/1ae368b5e94138aad94d2dc49aac984c36a6f749.png" alt="David Ironali" id="portraitPhoto" />
         </div>
       </div>
 
@@ -68,73 +76,24 @@
         <span>designed and contributed</span>
       </h2>
 
-      <!-- Item 1 -->
-      <div class="exp-item reveal">
-        <div class="exp-item__icon" style="background:#14A800;"></div>
-        <div class="exp-item__details">
-          <div class="exp-item__company">David Agency, Abuja</div>
-          <div class="exp-item__role">Product Designer</div>
-        </div>
-        <div class="exp-item__date-info">
-          <div class="exp-item__location">Remote</div>
-          <div class="exp-item__date">
-            <span class="exp-item__date-label">Date: </span>
-            <span class="exp-item__date-val">April 2024 - Present</span>
+      <!-- Experience items — replaced by cms-about.js when CMS data loads -->
+      <div id="experienceList">
+        <div class="exp-item reveal">
+          <div class="exp-item__icon" style="background:#14A800;"></div>
+          <div class="exp-item__details">
+            <div class="exp-item__company">David Agency, Abuja</div>
+            <div class="exp-item__role">Product Designer</div>
+          </div>
+          <div class="exp-item__date-info">
+            <div class="exp-item__location">Remote</div>
+            <div class="exp-item__date">
+              <span class="exp-item__date-label">Date: </span>
+              <span class="exp-item__date-val">April 2024 - Present</span>
+            </div>
           </div>
         </div>
+        <div class="exp-item__sep"></div>
       </div>
-      <div class="exp-item__sep"></div>
-
-      <!-- Item 2 -->
-      <div class="exp-item reveal">
-        <div class="exp-item__icon" style="background:#D46911;"></div>
-        <div class="exp-item__details">
-          <div class="exp-item__company">David Agency, Abuja</div>
-          <div class="exp-item__role">Product Designer</div>
-        </div>
-        <div class="exp-item__date-info">
-          <div class="exp-item__location">Remote</div>
-          <div class="exp-item__date">
-            <span class="exp-item__date-label">Date: </span>
-            <span class="exp-item__date-val">April 2024 - Present</span>
-          </div>
-        </div>
-      </div>
-      <div class="exp-item__sep"></div>
-
-      <!-- Item 3 -->
-      <div class="exp-item reveal">
-        <div class="exp-item__icon" style="background:#1B1C1E;"></div>
-        <div class="exp-item__details">
-          <div class="exp-item__company">David Agency, Abuja</div>
-          <div class="exp-item__role">Product Designer</div>
-        </div>
-        <div class="exp-item__date-info">
-          <div class="exp-item__location">Remote</div>
-          <div class="exp-item__date">
-            <span class="exp-item__date-label">Date: </span>
-            <span class="exp-item__date-val">April 2024 - Present</span>
-          </div>
-        </div>
-      </div>
-      <div class="exp-item__sep"></div>
-
-      <!-- Item 4 -->
-      <div class="exp-item reveal">
-        <div class="exp-item__icon" style="background:#E34829;"></div>
-        <div class="exp-item__details">
-          <div class="exp-item__company">David Agency, Abuja</div>
-          <div class="exp-item__role">Product Designer</div>
-        </div>
-        <div class="exp-item__date-info">
-          <div class="exp-item__location">Remote</div>
-          <div class="exp-item__date">
-            <span class="exp-item__date-label">Date: </span>
-            <span class="exp-item__date-val">April 2024 - Present</span>
-          </div>
-        </div>
-      </div>
-      <div class="exp-item__sep"></div>
 
       <div class="about-cv reveal">
         <a href="#" class="btn btn-dark">Read my CV</a>
@@ -144,9 +103,8 @@
     <!-- ─── My Stack ───────────────────────────────────────────── -->
     <section class="stack">
       <h2 class="stack__title reveal">My Stack</h2>
-      <div class="stack__rows">
-
-        <!-- Row 1 -->
+      <!-- Stack rows — replaced by cms-about.js when CMS data loads -->
+      <div class="stack__rows" id="stackRows">
         <div class="stack__row reveal">
           <div class="stack-item">
             <div class="stack-item__top">
@@ -176,11 +134,9 @@
               <span class="stack-item__name">Notion</span>
             </div>
             <div class="stack-item__sep"></div>
-            <span class="stack-item__label">CollaborationTool</span>
+            <span class="stack-item__label">Collaboration Tool</span>
           </div>
         </div>
-
-        <!-- Row 2 -->
         <div class="stack__row reveal">
           <div class="stack-item">
             <div class="stack-item__top">
@@ -190,7 +146,7 @@
               <span class="stack-item__name">Gmail</span>
             </div>
             <div class="stack-item__sep"></div>
-            <span class="stack-item__label">Mailing and MessagingTool</span>
+            <span class="stack-item__label">Mailing &amp; Messaging</span>
           </div>
           <div class="stack-item">
             <div class="stack-item__top">
@@ -213,7 +169,6 @@
             <span class="stack-item__label">Collaboration Tool</span>
           </div>
         </div>
-
       </div>
     </section>
 
@@ -256,7 +211,7 @@
     </div>
   </footer>
 
-  <script src="js/main.js"></script>
-  <script type="module" src="js/cms-about.js"></script>
+  <script src="js/main.js?v=2"></script>
+  <script type="module" src="js/cms-about.js?v=2"></script>
 </body>
 </html>

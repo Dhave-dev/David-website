@@ -98,7 +98,7 @@ async function loadBrandLogos() {
     logos = await sanityFetch(
       `*[_type == "brandLogo"] | order(order asc) {
         _id, name, url,
-        "logoUrl": logo.asset->url
+        "logoRef": logo.asset._ref
       }`
     )
   } catch (e) {
@@ -111,9 +111,9 @@ async function loadBrandLogos() {
   // Duplicate for seamless scroll loop
   const doubled = [...logos, ...logos]
   track.innerHTML = doubled.map(l => {
-    const imgSrc = l.logoUrl ? `${l.logoUrl}?w=200&auto=format&fit=max` : null
+    const imgSrc = l.logoRef ? refToUrl(l.logoRef, 200) : null
     const inner = imgSrc
-      ? `<img src="${imgSrc}" alt="${l.name}" class="brand-logo-item__img" />`
+      ? `<img src="${imgSrc}" alt="${l.name}" class="brand-logo-item__img" loading="lazy" />`
       : `<span class="brand-logo-item__name">${l.name}</span>`
     return l.url
       ? `<a href="${l.url}" target="_blank" rel="noopener" class="brand-logo-item">${inner}</a>`
@@ -225,7 +225,7 @@ async function loadSiteSettings() {
         heroHeadingLine1, heroHeadingLine2, heroSubtitle,
         availableForWork, availableBadgeText,
         email, behanceUrl, linkedinUrl, dribbbleUrl, avatarImage,
-        brandSectionTitle,
+        brandSectionTitle, homepageCtaTitle, homepageCtaSubtitle,
         "heroRefs": heroImages[].asset._ref
       }`
     )
@@ -256,6 +256,24 @@ async function loadSiteSettings() {
   if (settings.brandSectionTitle) {
     const label = document.querySelector('.brand-logos__label')
     if (label) label.textContent = settings.brandSectionTitle
+  }
+
+  // Homepage CTA
+  if (settings.homepageCtaTitle) {
+    const ctaTitle = document.getElementById('homepageCtaTitle')
+    if (ctaTitle) ctaTitle.textContent = settings.homepageCtaTitle
+  }
+  if (settings.homepageCtaSubtitle) {
+    const ctaSub = document.getElementById('homepageCtaSubtitle')
+    if (ctaSub) ctaSub.textContent = settings.homepageCtaSubtitle
+  }
+  if (settings.email) {
+    const ctaEmail = document.getElementById('homepageCtaEmail')
+    if (ctaEmail) ctaEmail.href = `mailto:${settings.email}`
+  }
+  if (settings.linkedinUrl) {
+    const ctaLi = document.getElementById('homepageCtaLinkedin')
+    if (ctaLi) ctaLi.href = settings.linkedinUrl
   }
 
   // Available badge

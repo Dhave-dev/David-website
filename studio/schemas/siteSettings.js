@@ -91,6 +91,25 @@ export const siteSettings = defineType({
       of: [{ type: 'image', options: { hotspot: true } }],
       description: 'Images displayed in the scrolling hero strip. Upload as many as you like.',
     }),
+    defineField({
+      name: 'portraitBgImages',
+      title: 'About Page — Portrait Background Images',
+      type: 'array',
+      of: [{ type: 'image', options: { hotspot: true } }],
+      description: 'Project screenshots scrolling behind your portrait photo on the About page.',
+    }),
+    defineField({
+      name: 'homepageCtaTitle',
+      title: 'Homepage CTA — Title',
+      type: 'string',
+      initialValue: "Let's build something worth remembering.",
+    }),
+    defineField({
+      name: 'homepageCtaSubtitle',
+      title: 'Homepage CTA — Subtitle',
+      type: 'string',
+      initialValue: 'Open to product design roles, brand projects, and early-stage collaborations.',
+    }),
   ],
   preview: {
     prepare: () => ({ title: 'Site Settings' }),
