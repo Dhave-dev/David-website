@@ -78,6 +78,13 @@ export const siteSettings = defineType({
       options: { hotspot: true },
     }),
     defineField({
+      name: 'brandSectionTitle',
+      title: 'Brand Section Label',
+      type: 'string',
+      initialValue: 'brands i have worked with',
+      description: 'Label shown above the brand logos marquee on the homepage',
+    }),
+    defineField({
       name: 'heroImages',
       title: 'Hero Images (max 4)',
       type: 'array',

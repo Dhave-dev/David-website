@@ -201,6 +201,7 @@ async function loadSiteSettings() {
       heroHeadingLine1, heroHeadingLine2, heroSubtitle,
       availableForWork, availableBadgeText,
       email, behanceUrl, linkedinUrl, dribbbleUrl, avatarImage,
+      brandSectionTitle,
       heroImages[] { alt, asset->{ url } }
     }`
   )
@@ -223,17 +224,26 @@ async function loadSiteSettings() {
   if (settings.dribbbleUrl) document.querySelectorAll('[aria-label="Dribbble"]').forEach(a => a.href = settings.dribbbleUrl)
   if (settings.email)       document.querySelectorAll('[aria-label="Contact"]').forEach(a  => { a.href = `mailto:${settings.email}` })
 
+  // Brand section title
+  if (settings.brandSectionTitle) {
+    const label = document.querySelector('.brand-logos__label')
+    if (label) label.textContent = settings.brandSectionTitle
+  }
+
   // Hero images
   if (settings.heroImages?.length) {
     const track = document.querySelector('.hero-images__track')
     if (track) {
       const imgs = settings.heroImages.slice(0, 4)
       const doubled = [...imgs, ...imgs]
-      track.innerHTML = doubled.map(img => `
-        <div class="hero-images__frame">
-          <img src="${imageUrl(img, 600)}" alt="${img.alt || ''}" loading="lazy" />
-        </div>
-      `).join('')
+      track.innerHTML = doubled.map(img => {
+        const src = img.asset?.url
+          ? `${img.asset.url}?w=600&auto=format&fit=crop`
+          : imageUrl(img, 600)
+        return `<div class="hero-images__frame">
+          <img src="${src}" alt="${img.alt || ''}" loading="lazy" />
+        </div>`
+      }).join('')
     }
   }
 

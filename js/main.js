@@ -1,15 +1,26 @@
-/* ─── Site loader ────────────────────────────────────────────── */
+/* ─── Site loader (home page only, skips on SPA navigation) ──── */
 (function initLoader() {
   const loader  = document.getElementById('site-loader')
   const counter = document.getElementById('loaderCount')
   const bar     = document.getElementById('loaderBar')
   if (!loader) return
 
+  // sessionStorage survives navigation but clears on reload/new session
+  // → show loader on first visit and every reload, skip on back/forward
+  const navEntry = performance.getEntriesByType('navigation')[0]
+  const isReload = navEntry?.type === 'reload'
+  const isFirstVisit = !sessionStorage.getItem('di_visited')
+
+  if (!isFirstVisit && !isReload) {
+    loader.remove()
+    return
+  }
+  sessionStorage.setItem('di_visited', '1')
+
   let count = 0
-  // Ease-out curve: faster early, slower near 100
   const durations = Array.from({ length: 100 }, (_, i) => {
-    const progress = i / 100
-    return 8 + progress * progress * 28  // 8ms → 36ms per tick
+    const p = i / 100
+    return 8 + p * p * 28  // ease-out: 8ms → 36ms per tick
   })
   let index = 0
 
@@ -20,8 +31,7 @@
       setTimeout(() => loader.classList.add('loader--done'), 400)
       return
     }
-    count++
-    index++
+    count++; index++
     counter.textContent = count
     bar.style.width = count + '%'
     setTimeout(tick, durations[index])
