@@ -93,16 +93,27 @@ async function loadBrandLogos() {
   const track = document.querySelector('.brand-logos__track')
   if (!track) return
 
-  const logos = await sanityFetch(
-    `*[_type == "brandLogo"] | order(order asc) { _id, name, logo, url }`
-  )
+  let logos
+  try {
+    logos = await sanityFetch(
+      `*[_type == "brandLogo"] | order(order asc) {
+        _id, name, url,
+        "logoUrl": logo.asset->url
+      }`
+    )
+  } catch (e) {
+    console.warn('Brand logos fetch failed:', e)
+    return
+  }
 
   if (!logos?.length) return
 
+  // Duplicate for seamless scroll loop
   const doubled = [...logos, ...logos]
   track.innerHTML = doubled.map(l => {
-    const inner = l.logo
-      ? `<img src="${imageUrl(l.logo, 160)}" alt="${l.name}" class="brand-logo-item__img" />`
+    const imgSrc = l.logoUrl ? `${l.logoUrl}?w=200&auto=format&fit=max` : null
+    const inner = imgSrc
+      ? `<img src="${imgSrc}" alt="${l.name}" class="brand-logo-item__img" />`
       : `<span class="brand-logo-item__name">${l.name}</span>`
     return l.url
       ? `<a href="${l.url}" target="_blank" rel="noopener" class="brand-logo-item">${inner}</a>`
@@ -194,17 +205,37 @@ async function loadExpertise() {
   }
 }
 
+/* ─── Hero image URL builder (works with all Sanity ref formats) ─ */
+function heroImgSrc(img) {
+  // asset->{ url } dereference path
+  if (img?.asset?.url) return img.asset.url + '?w=800&auto=format&fit=crop'
+  // _ref path: image-<id>-<WxH>-<ext>
+  const ref = img?.asset?._ref || img?._ref
+  if (!ref) return ''
+  const parts = ref.split('-')
+  const ext  = parts[parts.length - 1]
+  const dims = parts[parts.length - 2]
+  const id   = parts.slice(1, parts.length - 2).join('-')
+  return `https://cdn.sanity.io/images/yt7ymdxw/production/${id}-${dims}.${ext}?w=800&auto=format&fit=crop`
+}
+
 /* ─── Site settings (hero, socials, avatar) ──────────────────── */
 async function loadSiteSettings() {
-  const settings = await sanityFetch(
-    `*[_type == "siteSettings"][0] {
-      heroHeadingLine1, heroHeadingLine2, heroSubtitle,
-      availableForWork, availableBadgeText,
-      email, behanceUrl, linkedinUrl, dribbbleUrl, avatarImage,
-      brandSectionTitle,
-      heroImages[] { alt, asset->{ url } }
-    }`
-  )
+  let settings
+  try {
+    settings = await sanityFetch(
+      `*[_type == "siteSettings"][0] {
+        heroHeadingLine1, heroHeadingLine2, heroSubtitle,
+        availableForWork, availableBadgeText,
+        email, behanceUrl, linkedinUrl, dribbbleUrl, avatarImage,
+        brandSectionTitle,
+        "heroImages": heroImages[] { alt, "url": asset->url, asset }
+      }`
+    )
+  } catch (e) {
+    console.warn('Site settings fetch failed:', e)
+    return
+  }
   if (!settings) return
 
   const line1 = document.querySelector('.hero__heading-line1')
@@ -230,29 +261,32 @@ async function loadSiteSettings() {
     if (label) label.textContent = settings.brandSectionTitle
   }
 
-  // Hero images
-  if (settings.heroImages?.length) {
-    const track = document.querySelector('.hero-images__track')
-    if (track) {
-      const imgs = settings.heroImages.slice(0, 4)
-      const doubled = [...imgs, ...imgs]
-      track.innerHTML = doubled.map(img => {
-        const src = img.asset?.url
-          ? `${img.asset.url}?w=600&auto=format&fit=crop`
-          : imageUrl(img, 600)
-        return `<div class="hero-images__frame">
-          <img src="${src}" alt="${img.alt || ''}" loading="lazy" />
-        </div>`
-      }).join('')
-    }
-  }
-
+  // Available badge
   const badge = document.querySelector('.available-badge')
   if (badge && settings.availableForWork === false) {
     badge.style.display = 'none'
   } else if (badge && settings.availableBadgeText) {
     const label = badge.querySelector('span:last-child') || badge
     if (label !== badge) label.textContent = settings.availableBadgeText
+  }
+
+  // Hero images — replace the strip with CMS images
+  const heroImgs = settings.heroImages
+  if (heroImgs?.length) {
+    const track = document.querySelector('.hero-images__track')
+    if (track) {
+      // Duplicate set for seamless scroll loop
+      const set = [...heroImgs, ...heroImgs]
+      track.innerHTML = set.map(img => {
+        // prefer the dereferenced url, fall back to ref parsing
+        const src = img.url
+          ? `${img.url}?w=800&auto=format&fit=crop`
+          : heroImgSrc(img)
+        return `<div class="hero-images__frame">
+          <img src="${src}" alt="${img.alt || ''}" loading="lazy" />
+        </div>`
+      }).join('')
+    }
   }
 }
 

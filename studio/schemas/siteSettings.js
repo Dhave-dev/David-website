@@ -86,11 +86,10 @@ export const siteSettings = defineType({
     }),
     defineField({
       name: 'heroImages',
-      title: 'Hero Images (max 4)',
+      title: 'Hero Images',
       type: 'array',
       of: [{ type: 'image', options: { hotspot: true } }],
-      validation: (Rule) => Rule.max(4),
-      description: 'Images displayed in the hero section grid. Upload up to 4.',
+      description: 'Images displayed in the scrolling hero strip. Upload as many as you like.',
     }),
   ],
   preview: {
