@@ -162,7 +162,7 @@ async function loadOtherWorks() {
   if (!grid) return
 
   const projects = await sanityFetch(
-    `*[_type == "project" && slug.current != $slug] | order(order asc) [0...3] {
+    `*[_type == "project" && slug.current != $slug] | order(orderRank asc) [0...3] {
       _id, title, slug, category, coverImage
     }`,
     { slug }

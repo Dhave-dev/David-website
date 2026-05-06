@@ -8,7 +8,7 @@ async function loadProjects() {
   let projects
   try {
     projects = await sanityFetch(
-      `*[_type == "project"] | order(order asc) [0...6] {
+      `*[_type == "project"] | order(orderRank asc) [0...6] {
         _id, title, slug, category, coverImage
       }`
     )

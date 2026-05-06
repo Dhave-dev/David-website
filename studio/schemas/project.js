@@ -1,4 +1,5 @@
 import { defineType, defineField } from 'sanity'
+import { orderRankField, orderRankOrdering } from '@sanity/orderable-document-list'
 
 export const project = defineType({
   name: 'project',
@@ -201,23 +202,13 @@ export const project = defineType({
     }),
 
     /* ─── Meta ───────────────────────────────────────────────────── */
-    defineField({
-      name: 'order',
-      title: 'Display Order',
-      type: 'number',
-      description: 'Lower numbers appear first',
-      initialValue: 99,
-    }),
+    orderRankField({ type: 'project' }),
   ],
 
   preview: {
     select: { title: 'title', subtitle: 'category', media: 'coverImage' },
   },
   orderings: [
-    {
-      title: 'Display Order',
-      name: 'orderAsc',
-      by: [{ field: 'order', direction: 'asc' }],
-    },
+    orderRankOrdering,
   ],
 })

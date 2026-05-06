@@ -13,6 +13,7 @@
   "license": "ISC",
   "type": "module",
   "dependencies": {
+    "@sanity/orderable-document-list": "^1.5.1",
     "@sanity/vision": "^5.23.0",
     "react": "^19.2.5",
     "react-dom": "^19.2.5",
