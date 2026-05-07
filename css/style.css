@@ -175,6 +175,7 @@ ol, ul { list-style: none; }
   background: #1c1c1e;
 }
 @media (max-width: 520px) {
+  .floating-nav { width: fit-content; }
   .floating-nav__link { padding: 10px 16px; font-size: 13px; }
 }
 
