@@ -92,25 +92,6 @@ html { scroll-behavior: smooth; }
   flex-shrink: 0;
 }
 
-/* Fixed cinematic vignette — left & right edges */
-body::before,
-body::after {
-  content: '';
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  width: 140px;
-  z-index: 400;
-  pointer-events: none;
-}
-body::before {
-  left: 0;
-  background: linear-gradient(90deg, rgba(13,13,13,0.88) 0%, transparent 100%);
-}
-body::after {
-  right: 0;
-  background: linear-gradient(270deg, rgba(13,13,13,0.88) 0%, transparent 100%);
-}
 
 body {
   background: var(--bg);
@@ -624,10 +605,7 @@ body { padding-bottom: 140px; }
   object-fit: cover;
 }
 .expertise__overlay {
-  position: absolute;
-  inset: 0;
-  background: rgba(13,13,13,0.72);
-  z-index: 1;
+  display: none;
 }
 .expertise__content {
   position: relative;
@@ -1641,8 +1619,8 @@ body { padding-bottom: 140px; }
   .recent-works__header { padding: 0 20px; flex-direction: column; gap: 20px; text-align: center; }
   .filter-tabs { width: 100%; justify-content: center; }
   .works-carousel { padding: 0 20px 24px; }
-  .project-card { width: 320px; }
-  .project-card__image { min-height: 320px; }
+  .project-card { width: 280px; }
+  .project-card__image { aspect-ratio: 16 / 9; min-height: unset; }
 
   /* ── Expertise & Testimonials ── */
   .expertise__content { padding: 0 20px; }
