@@ -175,8 +175,7 @@ ol, ul { list-style: none; }
   background: #1c1c1e;
 }
 @media (max-width: 520px) {
-  .floating-nav { width: calc(100% - 40px); justify-content: center; }
-  .floating-nav__links { flex-wrap: wrap; justify-content: center; }
+  .floating-nav__link { padding: 10px 16px; font-size: 13px; }
 }
 
 /* ─── Buttons ────────────────────────────────────────────────── */
@@ -1617,9 +1616,11 @@ body { padding-bottom: 140px; }
 
   /* ── Recent works ── */
   .recent-works__header { padding: 0 20px; flex-direction: column; gap: 20px; text-align: center; }
-  .filter-tabs { width: 100%; justify-content: center; }
-  .works-carousel { padding: 0 20px 24px; }
-  .project-card { width: 280px; }
+  .filter-tabs { max-width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; flex-wrap: nowrap; }
+  .filter-tabs::-webkit-scrollbar { display: none; }
+  .filter-tab { padding: 8px 16px; font-size: 13px; white-space: nowrap; flex-shrink: 0; }
+  .works-carousel { padding: 0 20px 24px; grid-template-columns: 1fr; }
+  .project-card { width: auto; }
   .project-card__image { aspect-ratio: 16 / 9; min-height: unset; }
 
   /* ── Expertise & Testimonials ── */
@@ -1673,8 +1674,8 @@ body { padding-bottom: 140px; }
   .exp-item__date-info { text-align: left; width: 100%; padding-left: calc(75px + 16px); }
 
   /* Stack */
-  .stack__row { flex-wrap: wrap; gap: 20px; }
-  .stack-item { min-width: calc(50% - 12px); flex: none; }
+  .stack__row { flex-wrap: wrap; gap: 16px; padding: 20px 20px; }
+  .stack-item { width: calc(50% - 8px); flex: none; min-width: unset; }
 
   /* About CTA */
   .about-cta { padding: 60px 20px; gap: 32px; }
