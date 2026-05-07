@@ -1617,43 +1617,90 @@ body { padding-bottom: 140px; }
 }
 
 @media (max-width: 768px) {
+  /* ── Global ── */
   .topbar { padding: 20px; flex-wrap: wrap; gap: 16px; }
   .topbar__socials { display: none; }
+
+  /* ── Hero ── */
   .hero { padding: 60px 24px 40px; max-width: 100%; }
   .hero__heading { font-size: clamp(36px, 10vw, 56px); letter-spacing: 0.01em; }
-  .brand-logos { padding: 32px 0 40px; gap: 20px; }
+  .hero__cta .btn { width: 100%; max-width: 320px; }
+
+  /* ── Hero images strip ── */
+  .hero-images__frame { width: 220px; }
+
+  /* ── Brand logos ── */
+  .brand-logos { padding: 24px 0 32px; gap: 14px; }
+  .brand-logos__label { font-size: 18px; }
+  .brand-logos__scroll { max-width: 100%; }
+  .brand-logo-item__img { height: 28px; }
   .brand-logo-item__name { font-size: 14px; }
   .brand-logo-item__icon { width: 22px; height: 22px; }
-  .recent-works__header { padding: 0 20px; }
+
+  /* ── Recent works ── */
+  .recent-works__header { padding: 0 20px; flex-direction: column; gap: 20px; text-align: center; }
+  .filter-tabs { width: 100%; justify-content: center; }
   .works-carousel { padding: 0 20px 24px; }
   .project-card { width: 320px; }
   .project-card__image { min-height: 320px; }
+
+  /* ── Expertise & Testimonials ── */
   .expertise__content { padding: 0 20px; }
   .expertise__label { font-size: 22px; }
   .accordion-item__number-title { font-size: 26px; }
   .testimonials__header { padding: 0 20px; }
   .testimonials-scroll { padding: 0 20px 24px; }
-  .testimonial-card { width: 320px; }
+  .testimonial-card { width: 300px; }
+
+  /* ── Homepage CTA ── */
+  .homepage-cta { padding: 60px 20px; gap: 20px; }
+  .homepage-cta__title { font-size: clamp(28px, 8vw, 44px); letter-spacing: -1.5px; }
+  .homepage-cta__subtitle { font-size: 16px; }
+  .homepage-cta__btns { flex-direction: column; align-items: center; width: 100%; }
+  .homepage-cta__btns .btn { width: 100%; max-width: 320px; }
+
+  /* ── Footer ── */
   .site-footer { padding: 60px 20px; }
   .footer__inner { flex-direction: column; align-items: flex-start; gap: 24px; }
-  /* Works page */
+  .footer__connect { flex-wrap: wrap; }
+
+  /* ── Works page ── */
   .works-page { padding: 80px 20px 0; }
   .works-list-item { flex-direction: column; }
   .works-list-item__img { width: 100%; height: 240px; }
-  /* Project page */
+
+  /* ── Project page ── */
   .project-detail__inner { padding: 0 20px; }
+  .project-meta-bar { flex-direction: column; gap: 16px; align-items: flex-start; }
+  .project-meta-line { display: none; }
   .other-works { padding: 40px 20px; }
   .other-works__cards { flex-direction: column; }
-  /* About page */
+  .other-works__header { flex-direction: column; gap: 16px; }
+
+  /* ── About page ── */
   .about-hero, .experience, .stack { padding-left: 20px; padding-right: 20px; }
+  .about-hero__heading { font-size: clamp(32px, 8vw, 48px); }
+
+  /* Portrait card */
   .portrait-card { height: 340px; }
-  .portrait-card__bg-left, .portrait-card__bg-right { display: none; }
+  .portrait-bg { display: none; }
   .portrait-card__photo { width: 240px; height: 268px; }
-  .about-bio { font-size: 26px; }
-  .about-cta { padding: 60px 20px; }
+
+  /* Bio & tags */
+  .about-bio { font-size: 22px; letter-spacing: -1px; }
+  .about-tags { gap: 12px; }
+
+  /* Experience */
+  .exp-item { flex-wrap: wrap; gap: 16px; }
+  .exp-item__date-info { text-align: left; width: 100%; padding-left: calc(75px + 16px); }
+
+  /* Stack */
+  .stack__row { flex-wrap: wrap; gap: 20px; }
+  .stack-item { min-width: calc(50% - 12px); flex: none; }
+
+  /* About CTA */
+  .about-cta { padding: 60px 20px; gap: 32px; }
   .about-cta__heading { font-size: 28px; }
-  .stack__row { flex-wrap: wrap; gap: 24px; }
-  .stack-item { min-width: calc(50% - 12px); }
 }
 
 @media (max-width: 430px) {

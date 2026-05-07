@@ -9,7 +9,7 @@ async function loadProjects() {
   try {
     projects = await sanityFetch(
       `*[_type == "project"] | order(orderRank asc) [0...6] {
-        _id, title, slug, category, coverImage
+        _id, title, slug, category, filterCategory, coverImage
       }`
     )
   } catch (e) {
@@ -20,7 +20,7 @@ async function loadProjects() {
   if (!projects?.length) return
 
   grid.innerHTML = projects.map(p => `
-    <a href="project.html?slug=${p.slug.current}" class="project-card reveal">
+    <a href="project.html?slug=${p.slug.current}" class="project-card reveal" data-filter="${p.filterCategory || 'product-design'}">
       <div class="project-card__image">
         <img src="${imageUrl(p.coverImage, 800)}" alt="${p.title}" loading="lazy" />
       </div>
