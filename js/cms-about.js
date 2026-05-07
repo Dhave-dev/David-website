@@ -9,7 +9,7 @@ async function loadAbout() {
         aboutBio, availableForWork, availableBadgeText,
         behanceUrl, linkedinUrl, dribbbleUrl, email, cvUrl,
         portraitImage, avatarImage,
-        "portraitRefs": portraitBgImages[].asset._ref
+        "portraitRefs": heroImages[].asset._ref
       }`
     )
   } catch (e) {
