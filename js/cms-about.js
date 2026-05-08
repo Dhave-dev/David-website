@@ -136,9 +136,9 @@ async function loadStack() {
 
   if (!items?.length) return
 
-  // Group into rows of 3
+  // Group into rows of 2
   const rows = []
-  for (let i = 0; i < items.length; i += 3) rows.push(items.slice(i, i + 3))
+  for (let i = 0; i < items.length; i += 2) rows.push(items.slice(i, i + 2))
 
   container.innerHTML = rows.map(row => `
     <div class="stack__row reveal">

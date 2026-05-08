@@ -125,8 +125,11 @@ ol, ul { list-style: none; }
 .floating-nav {
   position: fixed;
   bottom: 36px;
-  left: 50%;
-  transform: translateX(-50%) translateY(0);
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  width: fit-content;
+  transform: translateY(0);
   z-index: 999;
   background: #0a0a0a;
   border: 1px solid #222224;
@@ -137,11 +140,10 @@ ol, ul { list-style: none; }
   padding: 6px;
   gap: 2px;
   pointer-events: auto;
-  width: auto;
   transition: transform 0.38s cubic-bezier(0.4,0,0.2,1), opacity 0.38s ease;
 }
 .floating-nav.nav-hidden {
-  transform: translateX(-50%) translateY(calc(100% + 52px));
+  transform: translateY(calc(100% + 52px));
   opacity: 0;
   pointer-events: none;
 }
@@ -175,7 +177,6 @@ ol, ul { list-style: none; }
   background: #1c1c1e;
 }
 @media (max-width: 520px) {
-  .floating-nav { width: fit-content; }
   .floating-nav__link { padding: 10px 16px; font-size: 13px; }
 }
 
