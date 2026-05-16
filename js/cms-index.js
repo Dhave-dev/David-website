@@ -62,7 +62,7 @@ async function loadTestimonials() {
 
   const items = await sanityFetch(
     `*[_type == "testimonial"] | order(order asc) {
-      _id, text, authorName, authorRole, authorAvatar
+      _id, text, authorName, authorRole, authorCompany, authorAvatar
     }`
   )
 
@@ -81,7 +81,7 @@ async function loadTestimonials() {
         </div>
         <div>
           <span class="testimonial-card__name">${t.authorName}</span>
-          ${t.authorRole ? `<span class="testimonial-card__role">${t.authorRole}</span>` : ''}
+          ${t.authorRole || t.authorCompany ? `<span class="testimonial-card__role">${[t.authorRole, t.authorCompany].filter(Boolean).join(' · ')}</span>` : ''}
         </div>
       </div>
     </div>

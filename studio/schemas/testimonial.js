@@ -20,9 +20,15 @@ export const testimonial = defineType({
     }),
     defineField({
       name: 'authorRole',
-      title: 'Author Role / Company',
+      title: 'Author Role / Title',
       type: 'string',
-      description: 'e.g. "CEO, Acme Inc." or "Lead Designer"',
+      description: 'e.g. "CEO" or "Lead Designer"',
+    }),
+    defineField({
+      name: 'authorCompany',
+      title: 'Company / Where They Work',
+      type: 'string',
+      description: 'e.g. "Acme Inc." or "Google"',
     }),
     defineField({
       name: 'authorAvatar',
