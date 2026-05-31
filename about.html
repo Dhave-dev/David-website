@@ -4,7 +4,33 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>About — David Ironali</title>
-  <link rel="stylesheet" href="css/style.css" />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+
+  <!-- SEO -->
+  <meta name="description" content="Meet David Ironali — Product Designer and Low-code Developer helping digital startups launch bold brands and pixel-perfect websites." />
+  <meta name="author" content="David Ironali" />
+  <meta name="keywords" content="David Ironali, product designer, about, UI/UX designer, brand designer, Nigeria" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="profile" />
+  <meta property="og:title" content="About — David Ironali" />
+  <meta property="og:description" content="Product Designer and Low-code Developer helping digital startups launch bold brands and pixel-perfect websites." />
+  <meta property="og:image" content="assets/1ae368b5e94138aad94d2dc49aac984c36a6f749.png" />
+  <meta property="og:url" content="https://davidironali.com/about" />
+  <meta property="og:site_name" content="David Ironali" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="About — David Ironali" />
+  <meta name="twitter:description" content="Product Designer and Low-code Developer helping digital startups launch bold brands and pixel-perfect websites." />
+  <meta name="twitter:image" content="assets/1ae368b5e94138aad94d2dc49aac984c36a6f749.png" />
+
+  <!-- Theme -->
+  <meta name="theme-color" content="#0d0d0f" />
+
+  <link rel="stylesheet" href="css/style.css?v=14" />
 </head>
 <body>
 
@@ -72,31 +98,25 @@
     <!-- ─── Experience ─────────────────────────────────────────── -->
     <section class="experience" style="padding-bottom:54px;">
       <h2 class="experience__heading reveal">
-        <span>Where I've grown,</span>
-        <span>designed and contributed</span>
+        <span>Career Journey</span>
       </h2>
 
       <!-- Experience items — replaced by cms-about.js when CMS data loads -->
       <div id="experienceList">
-        <div class="exp-item reveal">
-          <div class="exp-item__icon" style="background:#14A800;"></div>
-          <div class="exp-item__details">
-            <div class="exp-item__company">David Agency, Abuja</div>
-            <div class="exp-item__role">Product Designer</div>
-          </div>
-          <div class="exp-item__date-info">
-            <div class="exp-item__location">Remote</div>
-            <div class="exp-item__date">
-              <span class="exp-item__date-label">Date: </span>
-              <span class="exp-item__date-val">April 2024 - Present</span>
+        <div class="career-timeline">
+          <div class="career-item reveal">
+            <div class="career-item__dot"></div>
+            <div class="career-item__body">
+              <div class="career-item__year">2024–Present</div>
+              <div class="career-item__role">Product Designer</div>
+              <div class="career-item__meta">Add your experience in Sanity</div>
             </div>
           </div>
         </div>
-        <div class="exp-item__sep"></div>
       </div>
 
       <div class="about-cv reveal">
-        <a href="#" class="btn btn-dark">Read my CV</a>
+        <button onclick="openCV()" class="btn btn-dark">Read my CV</button>
       </div>
     </section>
 
@@ -211,7 +231,7 @@
     </div>
   </footer>
 
-  <script src="js/main.js?v=2"></script>
-  <script type="module" src="js/cms-about.js?v=4"></script>
+  <script src="js/main.js?v=3"></script>
+  <script type="module" src="js/cms-about.js?v=5"></script>
 </body>
 </html>

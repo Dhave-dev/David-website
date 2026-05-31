@@ -40,6 +40,7 @@ export const project = defineType({
       name: 'filterCategory',
       title: 'Filter Category',
       type: 'string',
+      initialValue: 'product-design',
       options: {
         list: [
           { title: 'Product Design', value: 'product-design' },
@@ -48,7 +49,6 @@ export const project = defineType({
         ],
         layout: 'radio',
       },
-      validation: (R) => R.required(),
     }),
     defineField({
       name: 'startDate',
@@ -199,6 +199,47 @@ export const project = defineType({
           },
         },
       ],
+    }),
+
+    /* ─── Process / Design Flow Gallery ─────────────────────────── */
+    defineField({
+      name: 'processGallery',
+      title: 'Design Process Gallery',
+      description: 'Upload as many images as you want to showcase the full design flow — sketches, wireframes, iterations, final screens',
+      type: 'array',
+      of: [
+        {
+          type: 'image',
+          options: { hotspot: true },
+          fields: [
+            {
+              name: 'alt',
+              type: 'string',
+              title: 'Alt text',
+            },
+            {
+              name: 'caption',
+              type: 'string',
+              title: 'Caption (optional)',
+              description: 'Short label shown below the image',
+            },
+          ],
+        },
+      ],
+      options: {
+        layout: 'grid',
+      },
+    }),
+
+    /* ─── Brand Identity PDF ────────────────────────────────────── */
+    defineField({
+      name: 'brandIdentityFile',
+      title: 'Brand Identity PDF',
+      description: 'Upload the brand identity PDF — a download button will appear on the case study page',
+      type: 'file',
+      options: {
+        accept: '.pdf,application/pdf',
+      },
     }),
 
     /* ─── Meta ───────────────────────────────────────────────────── */

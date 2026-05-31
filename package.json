@@ -1,0 +1,7 @@
+{
+  "name": "david-website",
+  "private": true,
+  "scripts": {
+    "start": "npx serve -l 63283"
+  }
+}

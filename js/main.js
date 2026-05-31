@@ -1,45 +1,3 @@
-/* ─── Site loader (home page only, skips on SPA navigation) ──── */
-(function initLoader() {
-  const loader  = document.getElementById('site-loader')
-  const counter = document.getElementById('loaderCount')
-  const bar     = document.getElementById('loaderBar')
-  if (!loader) return
-
-  // sessionStorage survives navigation but clears on reload/new session
-  // → show loader on first visit and every reload, skip on back/forward
-  const navEntry = performance.getEntriesByType('navigation')[0]
-  const isReload = navEntry?.type === 'reload'
-  const isFirstVisit = !sessionStorage.getItem('di_visited')
-
-  if (!isFirstVisit && !isReload) {
-    loader.remove()
-    return
-  }
-  sessionStorage.setItem('di_visited', '1')
-
-  let count = 0
-  const durations = Array.from({ length: 100 }, (_, i) => {
-    const p = i / 100
-    return 8 + p * p * 28  // ease-out: 8ms → 36ms per tick
-  })
-  let index = 0
-
-  function tick() {
-    if (index >= 100) {
-      counter.textContent = '100'
-      bar.style.width = '100%'
-      setTimeout(() => loader.classList.add('loader--done'), 400)
-      return
-    }
-    count++; index++
-    counter.textContent = count
-    bar.style.width = count + '%'
-    setTimeout(tick, durations[index])
-  }
-
-  tick()
-})();
-
 /* ─── Scroll-reveal ──────────────────────────────────────────── */
 (function initReveal() {
   const io = new IntersectionObserver(
@@ -217,4 +175,65 @@ document.querySelectorAll('.project-sidebar__link[href^="#"]').forEach(a => {
       ticking = false;
     });
   }, { passive: true });
+})();
+
+/* ─── CV Modal ───────────────────────────────────────────────── */
+(function initCVModal() {
+  const CV_PATH = 'assets/david-cv.pdf'
+
+  const modal = document.createElement('div')
+  modal.id = 'cvModal'
+  modal.className = 'cv-modal'
+  modal.innerHTML = `
+    <div class="cv-modal__backdrop"></div>
+    <div class="cv-modal__panel">
+      <div class="cv-modal__header">
+        <span class="cv-modal__title">Curriculum Vitae</span>
+        <div class="cv-modal__actions">
+          <a href="${CV_PATH}" target="_blank" rel="noopener" class="cv-modal__action-btn">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+              <path d="M2 12L12 2M12 2H6M12 2V8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            New Tab
+          </a>
+          <a href="${CV_PATH}" download="David-Ironali-CV.pdf" class="cv-modal__action-btn cv-modal__action-btn--download">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+              <path d="M7 2v7M4 6.5L7 9.5 10 6.5M2 11h10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            Download
+          </a>
+          <button class="cv-modal__close" aria-label="Close CV">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+              <path d="M2 2l10 10M12 2L2 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+      <div class="cv-modal__body">
+        <iframe title="David Ironali CV"></iframe>
+      </div>
+    </div>
+  `
+  document.body.appendChild(modal)
+
+  const backdrop = modal.querySelector('.cv-modal__backdrop')
+  const closeBtn = modal.querySelector('.cv-modal__close')
+  const iframe   = modal.querySelector('iframe')
+
+  function open() {
+    if (!iframe.src) iframe.src = CV_PATH
+    modal.classList.add('open')
+    document.body.style.overflow = 'hidden'
+  }
+  function close() {
+    modal.classList.remove('open')
+    document.body.style.overflow = ''
+  }
+
+  backdrop.addEventListener('click', close)
+  closeBtn.addEventListener('click', close)
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') close() })
+
+  window.openCV  = open
+  window.closeCV = close
 })();

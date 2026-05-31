@@ -22,10 +22,9 @@ export async function sanityFetch(query, params = {}) {
 }
 
 export function imageUrl(asset, width = 800) {
-  // Handle dereferenced asset with direct url
-  if (asset?.asset?.url) {
-    return `${asset.asset.url}?w=${width}&auto=format&fit=crop`
-  }
+  // asset-> returns { url, _id, ... } directly on asset
+  if (asset?.asset?.url) return `${asset.asset.url}?w=${width}&auto=format&fit=clip`
+  // plain asset reference — parse the _ref string
   const ref = asset?.asset?._ref || asset?._ref
   if (!ref) return ''
   // ref format: image-<id>-<WxH>-<ext>
@@ -34,14 +33,27 @@ export function imageUrl(asset, width = 800) {
   const ext  = parts[parts.length - 1]
   const dims = parts[parts.length - 2]
   const id   = parts.slice(1, parts.length - 2).join('-')
-  return `https://cdn.sanity.io/images/${PROJECT_ID}/${DATASET}/${id}-${dims}.${ext}?w=${width}&auto=format&fit=crop`
+  return `https://cdn.sanity.io/images/${PROJECT_ID}/${DATASET}/${id}-${dims}.${ext}?w=${width}&auto=format&fit=clip`
 }
 
 /* ─── Portable Text → HTML (minimal renderer) ───────────────── */
 export function toHtml(blocks = []) {
   if (!blocks?.length) return ''
-  return blocks.map(block => {
-    if (block._type !== 'block') return ''
+  let html = ''
+  let listTag = null
+  let listHtml = ''
+
+  function flushList() {
+    if (listTag && listHtml) {
+      html += `<${listTag}>${listHtml}</${listTag}>`
+      listTag = null
+      listHtml = ''
+    }
+  }
+
+  for (const block of blocks) {
+    if (block._type !== 'block') continue
+
     const text = (block.children || [])
       .map(span => {
         let t = span.text || ''
@@ -50,9 +62,23 @@ export function toHtml(blocks = []) {
         return t
       })
       .join('')
-    const style = block.style || 'normal'
-    if (style === 'h2') return `<h2 class="project-section-title">${text}</h2>`
-    if (style === 'h3') return `<h3>${text}</h3>`
-    return `<p>${text}</p>`
-  }).join('\n')
+
+    if (block.listItem) {
+      const tag = block.listItem === 'bullet' ? 'ul' : 'ol'
+      if (listTag !== tag) {
+        flushList()
+        listTag = tag
+      }
+      listHtml += `<li>${text}</li>`
+    } else {
+      flushList()
+      const style = block.style || 'normal'
+      if (style === 'h2') html += `<h2 class="project-section-title">${text}</h2>`
+      else if (style === 'h3') html += `<h3>${text}</h3>`
+      else html += `<p>${text}</p>`
+    }
+  }
+
+  flushList()
+  return html
 }

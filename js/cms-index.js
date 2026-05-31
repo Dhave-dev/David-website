@@ -9,7 +9,7 @@ async function loadProjects() {
   try {
     projects = await sanityFetch(
       `*[_type == "project"] | order(orderRank asc) [0...6] {
-        _id, title, slug, category, filterCategory, coverImage
+        _id, title, slug, category, filterCategory, coverImage, date
       }`
     )
   } catch (e) {
@@ -19,17 +19,22 @@ async function loadProjects() {
 
   if (!projects?.length) return
 
-  grid.innerHTML = projects.map(p => `
-    <a href="project.html?slug=${p.slug.current}" class="project-card reveal" data-filter="${p.filterCategory || 'product-design'}">
+  grid.innerHTML = projects.map(p => {
+    const year = p.date ? new Date(p.date).getFullYear() : ''
+    return `
+    <a href="project?slug=${p.slug.current}" class="project-card reveal" data-filter="${p.filterCategory || 'product-design'}">
       <div class="project-card__image">
-        <img src="${imageUrl(p.coverImage, 800)}" alt="${p.title}" loading="lazy" />
+        <img src="${imageUrl(p.coverImage, 1200)}" alt="${p.title}" loading="lazy" />
       </div>
       <div class="project-card__info">
-        <div class="project-card__title">${p.title}</div>
-        <div class="project-card__category">${p.category}</div>
+        <div class="project-card__title-row">
+          <div class="project-card__title">${p.title}</div>
+          ${year ? `<span class="project-card__year">${year}</span>` : ''}
+        </div>
+        <div class="project-card__category">${p.category || ''}</div>
       </div>
-    </a>
-  `).join('')
+    </a>`
+  }).join('')
 
   if (window.__revealObserver) {
     grid.querySelectorAll('.reveal').forEach((el, i) => {
@@ -242,10 +247,7 @@ async function loadSiteSettings() {
   if (line2 && settings.heroHeadingLine2) line2.textContent = settings.heroHeadingLine2
   if (sub   && settings.heroSubtitle)     sub.textContent   = settings.heroSubtitle
 
-  if (settings.avatarImage) {
-    const avatar = document.querySelector('.topbar__avatar img')
-    if (avatar) avatar.src = imageUrl(settings.avatarImage, 96)
-  }
+  // Logo is set statically in HTML — avatar from CMS is intentionally skipped
 
   if (settings.behanceUrl)  document.querySelectorAll('[aria-label="Behance"]').forEach(a  => a.href = settings.behanceUrl)
   if (settings.linkedinUrl) document.querySelectorAll('[aria-label="LinkedIn"]').forEach(a => a.href = settings.linkedinUrl)

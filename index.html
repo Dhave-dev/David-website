@@ -4,18 +4,35 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>David Ironali — Product Designer & Brand Designer</title>
-  <link rel="stylesheet" href="css/style.css" />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+
+  <!-- SEO -->
+  <meta name="description" content="David Ironali is a Product & Brand Designer helping fast-moving startups launch sharper brands and websites with clarity, speed, and zero hassle." />
+  <meta name="author" content="David Ironali" />
+  <meta name="keywords" content="product designer, brand designer, UI/UX, Webflow, Figma, startup design, Nigeria" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="David Ironali — Product Designer & Brand Designer" />
+  <meta property="og:description" content="Helping fast-moving startups launch sharper brands and websites with clarity, speed, and zero hassle." />
+  <meta property="og:image" content="assets/1ae368b5e94138aad94d2dc49aac984c36a6f749.png" />
+  <meta property="og:url" content="https://davidironali.com/" />
+  <meta property="og:site_name" content="David Ironali" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="David Ironali — Product Designer & Brand Designer" />
+  <meta name="twitter:description" content="Helping fast-moving startups launch sharper brands and websites with clarity, speed, and zero hassle." />
+  <meta name="twitter:image" content="assets/1ae368b5e94138aad94d2dc49aac984c36a6f749.png" />
+
+  <!-- Theme -->
+  <meta name="theme-color" content="#0d0d0f" />
+
+  <link rel="stylesheet" href="css/style.css?v=14" />
 </head>
 <body>
-
-  <!-- ─── Site Loader ──────────────────────────────────────────── -->
-  <div id="site-loader" aria-hidden="true">
-    <div class="loader__name">David Ironali</div>
-    <div class="loader__footer">
-      <div class="loader__bar"><div class="loader__bar-fill" id="loaderBar"></div></div>
-      <div class="loader__count"><span id="loaderCount">0</span>%</div>
-    </div>
-  </div>
 
   <!-- ─── Floating Nav ─────────────────────────────────────────── -->
   <nav class="floating-nav" aria-label="Main navigation">
@@ -29,12 +46,17 @@
   <!-- ─── Top bar ──────────────────────────────────────────────── -->
   <header class="topbar">
     <div class="topbar__profile">
-      <div class="topbar__avatar">
-        <img src="assets/2717da760a294d961f2b4f431dceca509fd3c588.png" alt="David Ironali" />
+      <div class="topbar__logo">
+        <svg width="47" height="34" viewBox="0 0 47 34" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="David Ironali">
+          <rect width="7" height="7" transform="translate(40 20)" fill="#E34829"/>
+          <path d="M3.096 14.4H8.64V22.428H14.148C19.296 22.428 22.68 19.296 22.68 14.4C22.68 9.504 19.296 6.372 14.148 6.372H3.096V1.8H14.436C22.644 1.8 28.296 6.768 28.296 14.4C28.296 22.032 22.644 27 14.436 27H3.096V14.4ZM36.9422 27H31.3982V1.8H36.9422V27Z" fill="white"/>
+        </svg>
       </div>
       <div class="topbar__name">David Ironali</div>
     </div>
-    <div class="topbar__socials">
+    <div class="topbar__right">
+      <button class="topbar__cv-btn" onclick="openCV()">View CV</button>
+      <div class="topbar__socials">
       <a href="https://www.behance.net/davidironali" target="_blank" rel="noopener" class="social-btn" aria-label="Behance">
         <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
           <path d="M22 7h-7V5h7v2zm1.726 10c-.442 1.297-2.029 3-5.101 3-3.074 0-5.564-1.729-5.564-5.675 0-3.91 2.325-5.92 5.466-5.92 3.082 0 4.964 1.782 5.375 4.426.078.506.109 1.188.095 2.14H15.97c.13 3.211 3.483 3.312 4.588 2.029H23.726zm-7.686-4h4.965c-.105-1.547-1.136-2.219-2.477-2.219-1.466 0-2.277.768-2.488 2.219zM7.33 4c3.439 0 5.942 1.208 5.942 4.255 0 1.694-.787 2.742-1.96 3.37 1.64.688 2.579 2.023 2.579 4.001 0 3.415-2.738 4.374-5.942 4.374H2V4h5.33zm-2.745 5.956h2.283c.861 0 2.08-.17 2.08-1.456 0-1.194-.87-1.5-1.968-1.5H4.585v2.956zm0 5.951h2.431c.949 0 2.28-.25 2.28-1.689 0-1.467-1.08-1.779-2.337-1.779H4.585v3.468z"/>
@@ -50,6 +72,7 @@
           <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm6.605 4.61a8.502 8.502 0 011.93 5.314c-.281-.054-3.101-.629-5.943-.271-.065-.141-.12-.293-.184-.445a25.416 25.416 0 00-.564-1.236c3.145-1.28 4.577-3.124 4.761-3.362zM12 3.475c2.17 0 4.154.814 5.662 2.148-.152.216-1.443 1.941-4.48 3.08-1.399-2.57-2.95-4.675-3.189-5A8.687 8.687 0 0112 3.475zm-3.633.803a53.896 53.896 0 013.167 4.935c-3.992 1.063-7.517 1.04-7.896 1.04a8.581 8.581 0 014.729-5.975zM3.453 12.01v-.26c.37.01 4.512.065 8.775-1.215.25.477.477.965.694 1.453-.109.033-.228.065-.336.098-4.404 1.42-6.747 5.303-6.942 5.629a8.522 8.522 0 01-2.19-5.705zM12 20.547a8.482 8.482 0 01-5.239-1.8c.152-.315 1.888-3.656 6.703-5.337.022-.01.033-.01.054-.022a35.318 35.318 0 011.823 6.475 8.4 8.4 0 01-3.341.684zm4.761-1.465c-.086-.52-.542-3.015-1.659-6.084 2.679-.423 5.022.271 5.314.369a8.468 8.468 0 01-3.655 5.715z"/>
         </svg>
       </a>
+    </div>
     </div>
   </header>
 
@@ -99,7 +122,8 @@
     <div class="recent-works__header reveal">
       <h2 class="section-title">Recent works</h2>
       <div class="filter-tabs" role="tablist">
-        <button class="filter-tab active" role="tab" data-filter="all">Product Design</button>
+        <button class="filter-tab active" role="tab" data-filter="all">All Work</button>
+        <button class="filter-tab"        role="tab" data-filter="product-design">Product Design</button>
         <button class="filter-tab"        role="tab" data-filter="brand-design">Brand Design</button>
         <button class="filter-tab"        role="tab" data-filter="development">Development</button>
       </div>
@@ -108,7 +132,7 @@
     <div class="works-carousel-wrap">
       <div class="works-carousel" id="worksCarousel">
         <!-- Fallback cards — replaced by cms-index.js once Sanity loads -->
-        <a href="project.html?slug=hue-ai-powered-logo-maker" class="project-card reveal">
+        <a href="project?slug=hue-ai-powered-logo-maker" class="project-card reveal">
           <div class="project-card__image">
             <img src="assets/e261f358b1046cf7fcdd3a5eae84d57a0e870be2.png" alt="Hue — AI Powered Logo Maker" />
           </div>
@@ -117,7 +141,7 @@
             <div class="project-card__category">UI/UX · Product Design</div>
           </div>
         </a>
-        <a href="project.html" class="project-card reveal">
+        <div class="project-card reveal">
           <div class="project-card__image">
             <img src="assets/49532c11ca82ffaef22dd847234cb8a7e51131a9.png" alt="Copnow Website Design" />
           </div>
@@ -125,8 +149,8 @@
             <div class="project-card__title">Copnow Website Design</div>
             <div class="project-card__category">UI/UX · Website</div>
           </div>
-        </a>
-        <a href="project.html" class="project-card reveal">
+        </div>
+        <div class="project-card reveal">
           <div class="project-card__image">
             <img src="assets/26b1cfcc0df17e6b6f571c08ecee704b358d392c.png" alt="Brand Identity — Startup" />
           </div>
@@ -134,8 +158,8 @@
             <div class="project-card__title">Brand Identity — Startup</div>
             <div class="project-card__category">Branding · Strategy</div>
           </div>
-        </a>
-        <a href="project.html" class="project-card reveal">
+        </div>
+        <div class="project-card reveal">
           <div class="project-card__image">
             <img src="assets/5e728a55a627903110951e65d30ff9b46bacaef5.png" alt="Copnow E-Commerce" />
           </div>
@@ -160,7 +184,7 @@
     <div class="expertise__overlay"></div>
 
     <div class="expertise__content">
-      <p class="expertise__label reveal">MY EXPERTISE</p>
+      <p class="expertise__label reveal">My Expertise</p>
 
       <div class="expertise__body">
         <ol class="expertise__accordion">
@@ -329,7 +353,7 @@
     </div>
   </footer>
 
-  <script src="js/main.js?v=2"></script>
-  <script type="module" src="js/cms-index.js?v=7"></script>
+  <script src="js/main.js?v=3"></script>
+  <script type="module" src="js/cms-index.js?v=10"></script>
 </body>
 </html>

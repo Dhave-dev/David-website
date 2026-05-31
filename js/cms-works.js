@@ -8,13 +8,13 @@ function renderItem(p, isLast) {
   return `
     <div data-filter="${p.filterCategory || 'product-design'}">
       <div class="works-list-item reveal">
-        <a href="project.html?slug=${p.slug.current}" class="works-list-item__img">
+        <a href="project?slug=${p.slug.current}" class="works-list-item__img">
           <img src="${imageUrl(p.coverImage, 700)}" alt="${p.title}" loading="lazy" />
         </a>
         <div class="works-list-item__info">
           <div class="works-list-item__title-row">
             <h2 class="works-list-item__title">${p.title}</h2>
-            <a href="project.html?slug=${p.slug.current}" class="works-list-item__arrow" aria-label="Open project">
+            <a href="project?slug=${p.slug.current}" class="works-list-item__arrow" aria-label="Open project">
               ${ARROW_SVG}
             </a>
           </div>

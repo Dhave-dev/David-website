@@ -1,0 +1,4 @@
+node_modules/
+studio/node_modules/
+.DS_Store
+*.docx

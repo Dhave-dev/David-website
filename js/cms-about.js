@@ -78,7 +78,7 @@ async function loadExperience() {
   try {
     items = await sanityFetch(
       `*[_type == "workExperience"] | order(order asc) {
-        _id, company, location, role, type, startDate, endDate, logo
+        _id, role, company, industry, startDate, endDate, description
       }`
     )
   } catch (e) {
@@ -88,29 +88,21 @@ async function loadExperience() {
 
   if (!items?.length) return
 
-  container.innerHTML = items.map(item => {
-    const dateStr = [item.startDate, item.endDate || 'Present'].filter(Boolean).join(' - ')
-    const logoHtml = item.logo
-      ? `<img src="${imageUrl(item.logo, 150)}" alt="${item.company}" />`
-      : ''
+  container.innerHTML = `<div class="career-timeline">${items.map((item, i) => {
+    const year = [item.startDate, item.endDate ? item.endDate : 'Present'].filter(Boolean).join('–')
+    const meta = [item.company, item.industry].filter(Boolean).join(' / ')
     return `
-      <div class="exp-item reveal">
-        <div class="exp-item__icon">${logoHtml}</div>
-        <div class="exp-item__details">
-          <div class="exp-item__company">${item.company}${item.location ? ', ' + item.location : ''}</div>
-          <div class="exp-item__role">${item.role}</div>
-        </div>
-        <div class="exp-item__date-info">
-          <div class="exp-item__location">${item.type || ''}</div>
-          <div class="exp-item__date">
-            <span class="exp-item__date-label">Date: </span>
-            <span class="exp-item__date-val">${dateStr}</span>
-          </div>
+      <div class="career-item reveal">
+        <div class="career-item__dot"></div>
+        <div class="career-item__body">
+          <div class="career-item__year">${year}</div>
+          <div class="career-item__role">${item.role}</div>
+          ${meta ? `<div class="career-item__meta">${meta}</div>` : ''}
+          ${item.description ? `<p class="career-item__desc">${item.description}</p>` : ''}
         </div>
       </div>
-      <div class="exp-item__sep"></div>
     `
-  }).join('')
+  }).join('')}</div>`
 
   if (window.__revealObserver) {
     container.querySelectorAll('.reveal').forEach(el => window.__revealObserver.observe(el))
