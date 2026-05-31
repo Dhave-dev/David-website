@@ -19,25 +19,20 @@
   });
 })();
 
-/* ─── Accordion ──────────────────────────────────────────────── */
+/* ─── Accordion (hover to open) ──────────────────────────────── */
 (function initAccordion() {
   const items = document.querySelectorAll('.accordion-item');
   items.forEach(item => {
-    const header = item.querySelector('.accordion-item__header');
     const toggle = item.querySelector('.accordion-item__toggle');
-    const trigger = header || toggle;
-    if (!trigger) return;
-    trigger.addEventListener('click', () => {
-      const isOpen = item.classList.contains('open');
+
+    item.addEventListener('mouseenter', () => {
       items.forEach(i => {
         i.classList.remove('open');
         const t = i.querySelector('.accordion-item__toggle');
         if (t) t.setAttribute('aria-expanded', 'false');
       });
-      if (!isOpen) {
-        item.classList.add('open');
-        if (toggle) toggle.setAttribute('aria-expanded', 'true');
-      }
+      item.classList.add('open');
+      if (toggle) toggle.setAttribute('aria-expanded', 'true');
     });
   });
 })();

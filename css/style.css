@@ -838,14 +838,14 @@ body { padding-bottom: 140px; }
   gap: 25px;
   counter-reset: expertise-counter;
 }
-.accordion-item { counter-increment: expertise-counter; }
+.accordion-item { counter-increment: expertise-counter; cursor: pointer; }
 
 .accordion-item {}
 .accordion-item__header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  cursor: none;
+  cursor: pointer;
   gap: 111px;
   margin-bottom: 25px;
 }
