@@ -23,20 +23,20 @@
 (function initAccordion() {
   const items = document.querySelectorAll('.accordion-item');
   items.forEach(item => {
+    const header = item.querySelector('.accordion-item__header');
     const toggle = item.querySelector('.accordion-item__toggle');
-    if (!toggle) return;
-    toggle.addEventListener('click', () => {
+    const trigger = header || toggle;
+    if (!trigger) return;
+    trigger.addEventListener('click', () => {
       const isOpen = item.classList.contains('open');
-      // close all
       items.forEach(i => {
         i.classList.remove('open');
         const t = i.querySelector('.accordion-item__toggle');
         if (t) t.setAttribute('aria-expanded', 'false');
       });
-      // open clicked if it was closed
       if (!isOpen) {
         item.classList.add('open');
-        toggle.setAttribute('aria-expanded', 'true');
+        if (toggle) toggle.setAttribute('aria-expanded', 'true');
       }
     });
   });

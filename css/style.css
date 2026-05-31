@@ -100,11 +100,19 @@ body {
   font-variation-settings: var(--wdth);
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
+  cursor: none;
 }
 img { display: block; max-width: 100%; }
-a  { color: inherit; text-decoration: none; }
-button { cursor: pointer; border: none; background: none; font: inherit; }
+a  { color: inherit; text-decoration: none; cursor: none; }
+button { cursor: none; border: none; background: none; font: inherit; }
 ol, ul { list-style: none; }
+
+/* Restore cursor only where text input is expected */
+input, textarea, select, [contenteditable="true"] {
+  font-family: var(--font-family-base);
+  caret-color: auto;
+  cursor: text;
+}
 
 /* ─── Typography helpers ─────────────────────────────────────── */
 .font-display { font-family: var(--display); }
@@ -837,6 +845,7 @@ body { padding-bottom: 140px; }
   display: flex;
   align-items: center;
   justify-content: space-between;
+  cursor: none;
   gap: 111px;
   margin-bottom: 25px;
 }
