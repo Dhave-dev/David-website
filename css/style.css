@@ -114,6 +114,32 @@ input, textarea, select, [contenteditable="true"] {
   cursor: text;
 }
 
+/* ─── Custom cursor ──────────────────────────────────────────── */
+#custom-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 10px;
+  height: 10px;
+  background: #fff;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 99999;
+  opacity: 0;
+  margin-left: -5px;
+  margin-top: -5px;
+  transition: width .2s ease, height .2s ease, margin .2s ease, background .2s ease, opacity .3s ease;
+  will-change: transform;
+}
+#custom-cursor.cursor--hover {
+  width: 32px;
+  height: 32px;
+  margin-left: -16px;
+  margin-top: -16px;
+  background: rgba(255,255,255,0.15);
+  border: 1px solid rgba(255,255,255,0.4);
+}
+
 /* ─── Typography helpers ─────────────────────────────────────── */
 .font-display { font-family: var(--display); }
 .fw-400 { font-weight: 400; }

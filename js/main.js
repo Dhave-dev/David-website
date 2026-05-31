@@ -1,3 +1,35 @@
+/* ─── Custom cursor ──────────────────────────────────────────── */
+(function initCursor() {
+  const dot = document.createElement('div')
+  dot.id = 'custom-cursor'
+  document.body.appendChild(dot)
+
+  let x = -100, y = -100, tx = -100, ty = -100
+  let visible = false
+
+  document.addEventListener('mousemove', e => {
+    tx = e.clientX; ty = e.clientY
+    if (!visible) { x = tx; y = ty; dot.style.opacity = '1'; visible = true }
+  })
+  document.addEventListener('mouseleave', () => { dot.style.opacity = '0'; visible = false })
+  document.addEventListener('mouseenter', () => { dot.style.opacity = '1'; visible = true })
+
+  // Grow on hoverable elements
+  const growTargets = 'a, button, [role="tab"], .accordion-item, .filter-tab, .project-card, .works-list-item'
+  document.addEventListener('mouseover', e => {
+    if (e.target.closest(growTargets)) dot.classList.add('cursor--hover')
+    else dot.classList.remove('cursor--hover')
+  })
+
+  // Smooth follow
+  ;(function loop() {
+    x += (tx - x) * 0.18
+    y += (ty - y) * 0.18
+    dot.style.transform = `translate(${x}px, ${y}px)`
+    requestAnimationFrame(loop)
+  })()
+})();
+
 /* ─── Scroll-reveal ──────────────────────────────────────────── */
 (function initReveal() {
   const io = new IntersectionObserver(
