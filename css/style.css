@@ -1594,6 +1594,7 @@ body { padding-bottom: 140px; }
    ABOUT PAGE
 ══════════════════════════════════════════════════════════════ */
 .about-page { padding-top: 135px; }
+.about-page > .project-back { padding-left: 120px; padding-top: 0; display: block; }
 .about-hero { padding: 0 120px; }
 .about-hero__badge { margin-bottom: 54px; }
 .about-hero__heading {
@@ -1907,6 +1908,7 @@ body { padding-bottom: 140px; }
   .project-sidebar { display: none; }
   .other-works { padding: 60px; }
   .about-hero, .experience, .stack { padding-left: 60px; padding-right: 60px; }
+  .about-page > .project-back { padding-left: 60px; }
 }
 
 @media (max-width: 768px) {
@@ -1979,6 +1981,7 @@ body { padding-bottom: 140px; }
 
   /* ── About page ── */
   .about-hero, .experience, .stack { padding-left: 20px; padding-right: 20px; }
+  .about-page > .project-back { padding-left: 20px; }
   .about-hero__heading { font-size: clamp(32px, 8vw, 48px); }
 
   /* Portrait card */

@@ -85,12 +85,13 @@ function initFilter(allProjects) {
       tab.classList.add('active')
       const filter = tab.dataset.filter
 
-      document.querySelectorAll('#worksGrid > div[data-filter]').forEach(item => {
-        const match = filter === 'all' || item.dataset.filter === filter
-        item.style.display = match ? '' : 'none'
-        // also hide/show separator of previous item
+      const allItems = Array.from(document.querySelectorAll('#worksGrid > div[data-filter]'))
+      const visible = allItems.filter(item => filter === 'all' || item.dataset.filter === filter)
+      allItems.forEach(item => { item.style.display = 'none' })
+      visible.forEach((item, i) => {
+        item.style.display = ''
         const sep = item.querySelector('.works-list-item__sep')
-        if (sep) sep.style.display = match ? '' : 'none'
+        if (sep) sep.style.display = i < visible.length - 1 ? '' : 'none'
       })
     })
   })

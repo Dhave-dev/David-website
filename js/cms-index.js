@@ -170,26 +170,22 @@ async function loadExpertise() {
     expertiseImg.src = imageUrl(items[0].previewImage, 900)
   }
 
-  // Re-init accordion click
+  // Re-init accordion — hover to open (matches main.js behaviour)
   const allItems = accordion.querySelectorAll('.accordion-item')
   allItems.forEach(item => {
     const toggle = item.querySelector('.accordion-item__toggle')
-    if (!toggle) return
-    toggle.addEventListener('click', () => {
-      const isOpen = item.classList.contains('open')
+    item.addEventListener('mouseenter', () => {
       allItems.forEach(i => {
         i.classList.remove('open')
         const t = i.querySelector('.accordion-item__toggle')
         if (t) t.setAttribute('aria-expanded', 'false')
       })
-      if (!isOpen) {
-        item.classList.add('open')
-        toggle.setAttribute('aria-expanded', 'true')
-      }
+      item.classList.add('open')
+      if (toggle) toggle.setAttribute('aria-expanded', 'true')
     })
   })
 
-  // Re-init image swap on hover
+  // Image swap on hover
   if (expertiseImg) {
     expertiseImg.style.transition = 'opacity 0.22s ease'
     allItems.forEach(item => {
