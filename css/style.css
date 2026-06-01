@@ -1060,7 +1060,7 @@ body { padding-bottom: 140px; }
 .site-footer {
   background: var(--bg);
   border-top: 1px solid var(--border);
-  padding: 48px 120px;
+  padding: 40px 120px;
 }
 .footer__inner {
   display: flex;
@@ -1958,7 +1958,7 @@ body { padding-bottom: 140px; }
   .homepage-cta__btns .btn { width: 100%; max-width: 320px; }
 
   /* ── Footer ── */
-  .site-footer { padding: 60px 20px; }
+  .site-footer { padding: 32px 20px; }
   .footer__inner { flex-direction: column; align-items: flex-start; gap: 24px; }
   .footer__connect { flex-wrap: wrap; }
 
