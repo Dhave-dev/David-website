@@ -1468,9 +1468,8 @@ body { padding-bottom: 140px; }
 
 /* ─── Process Gallery ────────────────────────────────────────── */
 .process-gallery {
-  padding: 80px var(--side-pad) 40px;
-  max-width: var(--max-w);
-  margin: 0 auto;
+  padding-top: 80px;
+  padding-bottom: 60px;
 }
 .process-gallery__title {
   font-family: var(--display);

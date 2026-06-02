@@ -199,7 +199,7 @@ async function loadProject() {
         }).join('')}
       </div>
     `
-    content.after(gallerySection)
+    content.closest('.project-body').after(gallerySection)
     if (window.__revealObserver) {
       gallerySection.querySelectorAll('.reveal').forEach((el, i) => {
         el.style.transitionDelay = i * 60 + 'ms'
